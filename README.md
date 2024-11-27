@@ -36,14 +36,14 @@ User Experience: </br>
 
 Provide an intuitive interface for employees to submit reports and for admins to manage and review them. </br>
 
-Conclusions </br>
+## Conclusions </br>
 The system has successfully integrated: </br>
 
 Daily report functionality, allowing employees to submit reports for each day of the week, with a consolidated weekly summary. </br>
 Client and lead management, ensuring smooth order processing and product selection. </br>
 By automating these processes, the system not only reduces manual errors but also provides detailed reports that assist in decision-making. Employees are now able to submit reports digitally. </br>
 
-Recommendations </br>
+## Recommendations </br>
 Improving Facial Recognition Accuracy: </br>
 
 The system could be enhanced with better facial recognition technology or using a two-factor verification (geolocation and face verification) for more accurate attendance tracking. </br>
