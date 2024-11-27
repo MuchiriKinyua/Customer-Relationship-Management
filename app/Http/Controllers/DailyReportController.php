@@ -8,58 +8,58 @@ use Illuminate\Http\Request;
 
 class DailyReportController extends Controller
 {
-    public function create($employeeId, $dayIndex = 0)
-    {
-        // Pass all employees to the view
-        $employees = Employee::all();
-        $employee = Employee::findOrFail($employeeId);
-        $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-        $currentDay = $days[$dayIndex] ?? 'monday'; // Default to Monday if dayIndex is not provided
-    
-        return view('daily_reports.create', compact('employee', 'employees', 'dayIndex', 'currentDay'));
-    }
-    
-    
-
-    public function store(Request $request)
+    public function create($employeeId)
 {
-    // Validate the request based on the day
+    $employee = Employee::findOrFail($employeeId);
+
+    return view('daily_reports.create', compact('employee'));
+}
+
+public function store(Request $request)
+{
+    // Validate the request
     $request->validate([
-        'employee_id' => 'required|exists:employees,id', // Ensure the employee exists
-        'monday_report' => 'nullable|string',
-        'tuesday_report' => 'nullable|string',
-        'wednesday_report' => 'nullable|string',
-        'thursday_report' => 'nullable|string',
-        'friday_report' => 'nullable|string',
+        'employee_id' => 'required|exists:employees,id',
+        'day' => 'required|in:monday,tuesday,wednesday,thursday,friday',
+        'report' => 'required|string',
+        'report_date' => 'required|date',
+        'signature' => 'required|string',  // Ensure signature is provided
+        'is_human' => 'accepted',  // Ensure the "I'm not a robot" checkbox is checked
     ]);
 
     // Create the daily report
     DailyReport::create([
-        'employee_id' => $request->employee_id, // Save the employee_id
-        'monday_report' => $request->monday_report,
-        'tuesday_report' => $request->tuesday_report,
-        'wednesday_report' => $request->wednesday_report,
-        'thursday_report' => $request->thursday_report,
-        'friday_report' => $request->friday_report,
+        'employee_id' => $request->employee_id,
+        'day' => $request->day,
+        'report' => $request->report,
+        'report_date' => $request->report_date,
+        'signature' => $request->signature,
     ]);
 
-    // Redirect to the employee index after saving the report
     return redirect()->route('employees.index')->with('success', 'Report saved successfully.');
 }
 
-public function viewReport($employeeId, $dayIndex)
+
+public function viewReport($employeeId)
 {
-    // Retrieve the employee and the daily report for the specified day
+    // Retrieve the employee and the daily reports for the week
     $employee = Employee::findOrFail($employeeId);
+
     $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-    $currentDay = $days[$dayIndex];
     
-    // Get the report for the specific employee and day
-    $report = DailyReport::where('employee_id', $employeeId)
-                         ->first();  // You can adjust this to retrieve reports from any day
+    // Fetch the reports for each day of the week for the specified employee
+    $reports = DailyReport::where('employee_id', $employeeId)
+                          ->whereIn('day', $days)
+                          ->get()
+                          ->keyBy('day'); // This will return the reports indexed by day (monday, tuesday, etc.)
+
+    // Generate a summary by combining the reports from Monday to Friday
+    $summary = $reports->map(function ($report) {
+        return $report->report;
+    })->implode("\n\n"); // Combining reports with a new line between each day
 
     // Pass the data to the view
-    return view('daily_reports.view', compact('employee', 'report', 'currentDay'));
+    return view('daily_reports.view', compact('employee', 'reports', 'days', 'summary'));
 }
 
 

@@ -1,66 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+![Use-of-online-crm-tools-to-build-your-brand](https://github.com/user-attachments/assets/8341f3e5-164f-4f98-8b4d-52b1998b8366)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+# CUSTOMER RELATIONSHIP MANAGEMENT </br>
+## Overview </br>
+The system being developed is a CRM (Customer Relationship Management) application for managing various business operations, with a focus on employee management and daily report tracking. The system allows employees to submit daily reports and manage client-lead interactions and product orders. Various features have been integrated into the system to facilitate the efficient management of employee performance and business processes. </br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key functionalities include: </br>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Employee Management: CRUD operations for employees, including face verification for attendance. </br>
+Daily Reporting: Employees submit daily reports detailing their tasks, which are saved in the system for future reference. </br>
+Lead and Client Management: Leads are linked to clients and products, with reporting functionality based on products and employee orders. </br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Problem Statement </br>
+The primary goal of the system is to automate and streamline business operations such as attendance management, reporting, and client-lead-product interactions. Specific challenges addressed include: </br>
 
-## Learning Laravel
+Daily Reporting: The need for employees to submit daily reports and for managers to have easy access to these reports, ensuring timely updates on performance. </br>
+Lead-Product Tracking: Ensuring that orders are linked to leads and employees, and that product availability is filtered based on the lead’s selection. </br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Major Objective </br>
+The major objective of this system is to automate business processes, ensuring efficient employee attendance tracking, daily report generation, and product management. The system should: </br>
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Enable daily reporting with a focus on employee performance and productivity. </br>
+Ensure lead-to-client and order-to-product management is smooth and transparent, with proper tracking mechanisms in place. </br>
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Specific Objectives </br>
+Daily Report Submission: </br>
 
-## Laravel Sponsors
+Enable employees to submit reports for specific days (Monday to Friday). </br>
+Store daily reports for each employee, allowing managers to review them based on specific dates. </br>
+Provide an option to view reports for the entire week with a combined summary. </br>
+Lead and Client Management: </br>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Implement a system to track leads and associate them with products, employees, and clients. </br>
+Allow employees to update product and client details when making orders, ensuring that the correct products are linked to leads and clients. </br>
+User Experience: </br>
 
-### Premium Partners
+Provide an intuitive interface for employees to submit reports and for admins to manage and review them. </br>
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Conclusions </br>
+The system has successfully integrated: </br>
 
-## Contributing
+Daily report functionality, allowing employees to submit reports for each day of the week, with a consolidated weekly summary. </br>
+Client and lead management, ensuring smooth order processing and product selection. </br>
+By automating these processes, the system not only reduces manual errors but also provides detailed reports that assist in decision-making. Employees are now able to submit reports digitally. </br>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Recommendations </br>
+Improving Facial Recognition Accuracy: </br>
 
-## Code of Conduct
+The system could be enhanced with better facial recognition technology or using a two-factor verification (geolocation and face verification) for more accurate attendance tracking. </br>
+Mobile App Development: </br>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+A mobile app version could be developed, allowing employees to mark attendance and submit reports on the go, especially in remote locations. </br>
+Weekly and Monthly Reports: </br>
 
-## Security Vulnerabilities
+The current system tracks daily reports, but adding a feature for weekly/monthly performance reviews could help managers get a better overview of employee productivity. </br>
+Additional User Roles: </br>
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Expand the role-based access control to allow more specific permissions, such as creating a role for HR to only view attendance and reports without modifying them. </br>
+Integration with HR and Payroll Systems: </br>
 
-## License
+Integrate the attendance system with HR and payroll systems, allowing automatic payroll generation based on attendance data. </br>
+ReCAPTCHA: </br>
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+For added security, make the ReCAPTCHA mandatory for submissions or certain actions to avoid abuse and ensure that only legitimate users can submit reports. </br>
+Enhance the Reporting Features: </br>
+
+Introduce a report approval system, where managers review reports before they are finalized, which will ensure better data validation and reduce errors. </br>
+By addressing these recommendations, the system can be enhanced to provide even more value to the organization, improving both employee management and operational efficiency.

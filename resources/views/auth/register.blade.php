@@ -1,9 +1,13 @@
 <x-laravel-ui-adminlte::adminlte-layout>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <body class="hold-transition register-page">
         <div class="register-box">
+        <div class="image-container-register">
+            <img src="{{ asset('images/3-Damelin-Sep-2024-The-importance-of-Customer-Relationship-Management-CRM-in-Marketing-Management-1536x864.jpg') }}" alt="Welcome to CustomerCRM">
+        </div>
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+                <h1>CustomerCRM</h1>
             </div>
 
             <div class="card">
@@ -87,4 +91,9 @@
         </div>
         <!-- /.register-box -->
     </body>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.backgroundColor = "rgb(147, 147, 197)";
+    });
+    </script>
 </x-laravel-ui-adminlte::adminlte-layout>

@@ -19,11 +19,9 @@ class DailyReport extends Model
     // Define which fields are mass assignable
     protected $fillable = [
         'employee_id', 
-        'monday_report', 
-        'tuesday_report', 
-        'wednesday_report', 
-        'thursday_report', 
-        'friday_report',
+        'day',         
+        'report',       
+        'report_date',  
     ];
 
     protected $casts = [

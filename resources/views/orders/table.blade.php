@@ -1,11 +1,11 @@
 <div class="card-body p-0">
     <div class="table-responsive">
-        <table class="table" id="orders-table">
-            <thead>
+        <table class="table table-bordered" id="orders-table"> <!-- Added table-bordered -->
+            <thead class="thead-light"> <!-- Optional: Light header styling -->
                 <tr>
                     <th>Product</th>
                     <th>Quantity Ordered</th>
-                    <th>Total Price</th>
+                    <th>Grand Price</th>
                     <th>Order Date</th>
                     <th>Status</th>
                     <th>Client</th> <!-- Display Client -->

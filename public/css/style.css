@@ -18,7 +18,7 @@ body{
     right: 20px; 
     font-size: 40px;
     text-decoration: none; 
-    color: blue; 
+    color: green; 
 }
 .login-link {
     position: absolute; 
@@ -35,7 +35,6 @@ body{
     color: green; 
 }
 
-/* custom.css */
 .image-container {
     margin-top: 300px;
     margin-left: 700px;
@@ -54,4 +53,59 @@ body{
     margin-top: 70px;
     font-size: 30px;
     color: brown;
+}
+
+body.hold-transition.login-page {
+    background-color: rgb(147, 147, 197);
+}
+
+.login-logo{
+    color: brown;
+}
+
+.login-box {
+    background-color: blue;
+    margin-bottom: 200px;
+}
+
+.image-container-login {
+    width: 500px;
+    height: 300px; /* Set a fixed height */
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container-login img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+body.hold-transition.register-page {
+    background-color: rgb(147, 147, 197);
+}
+
+.image-container-register {
+    width: 500px;
+    height: 300px; /* Set a fixed height */
+    margin-left: -80px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container-register img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.register-logo{
+    color: brown;
+}
+
+.register-box {
+    background-color: blue;
+    margin-bottom: 200px;
 }

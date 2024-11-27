@@ -15,23 +15,28 @@
         @include('adminlte-templates::common.errors')
 
         <div class="card">
-
             {!! Form::open(['route' => 'daily_reports.store']) !!}
 
             <div class="card-body">
-
                 <!-- Employee ID (hidden) -->
                 {!! Form::hidden('employee_id', $employee->id) !!}
 
-                <!-- Dynamically display the form for the current day -->
-                @php
-                    $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-                    $currentDay = $days[$dayIndex] ?? 'monday'; // Default to Monday if dayIndex is not provided
-                @endphp
-
+                <!-- Day Dropdown -->
                 <div class="form-group">
-                    {!! Form::label("{$currentDay}_report", ucfirst($currentDay) . " Report:") !!}
-                    {!! Form::textarea("{$currentDay}_report", null, ['class' => 'form-control']) !!}
+                    {!! Form::label('day', 'Select Day:') !!}
+                    {!! Form::select('day', [
+                        'monday' => 'Monday',
+                        'tuesday' => 'Tuesday',
+                        'wednesday' => 'Wednesday',
+                        'thursday' => 'Thursday',
+                        'friday' => 'Friday'
+                    ], null, ['class' => 'form-control', 'placeholder' => 'Choose a day']) !!}
+                </div>
+
+                <!-- Report Field -->
+                <div class="form-group">
+                    {!! Form::label('report', 'Report:') !!}
+                    {!! Form::textarea('report', null, ['class' => 'form-control']) !!}
                 </div>
 
                 <!-- Report Date Field -->
@@ -40,6 +45,19 @@
                     {!! Form::date('report_date', null, ['class' => 'form-control', 'id' => 'report_date']) !!}
                 </div>
 
+                <!-- Signature Field -->
+                <div class="form-group">
+                    {!! Form::label('signature', 'Signature:') !!}
+                    {!! Form::text('signature', null, ['class' => 'form-control', 'placeholder' => 'Enter your Full Name']) !!}
+                </div>
+
+                <!-- ReCAPTCHA / "I am not a robot" Checkbox -->
+                <div class="form-group">
+                    <div class="form-check">
+                        {!! Form::checkbox('is_human', '1', false, ['class' => 'form-check-input', 'id' => 'is_human']) !!}
+                        {!! Form::label('is_human', "I'm not a robot", ['class' => 'form-check-label']) !!}
+                    </div>
+                </div>
             </div>
 
             <div class="card-footer">
@@ -48,7 +66,6 @@
             </div>
 
             {!! Form::close() !!}
-
         </div>
     </div>
 @endsection
