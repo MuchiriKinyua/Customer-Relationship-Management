@@ -81,5 +81,36 @@
                 $('#lead_date').datepicker();
             });
         </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const navLinks = document.querySelectorAll('.nav-sidebar .nav-link');
+        
+        // Ensure the correct link is styled on page load
+        navLinks.forEach(link => {
+            if (link.classList.contains('active')) {
+                link.style.backgroundColor = 'orange';
+                link.style.color = 'white';
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                // Remove the active class and styles from all links
+                navLinks.forEach(nav => {
+                    nav.classList.remove('active');
+                    nav.style.backgroundColor = '';
+                    nav.style.color = '';
+                });
+
+                // Add active class and styles to the clicked link
+                this.classList.add('active');
+                this.style.backgroundColor = 'orange';
+                this.style.color = 'white';
+            });
+        });
+    });
+</script>
+
+
     </body>
 </x-laravel-ui-adminlte::adminlte-layout>
