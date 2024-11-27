@@ -1,6 +1,6 @@
-![images](https://github.com/user-attachments/assets/f351e6a9-ed62-4218-b9af-2cd66f5e6282) ![Use-of-online-crm-tools-to-build-your-brand](https://github.com/user-attachments/assets/8341f3e5-164f-4f98-8b4d-52b1998b8366)
+![Use-of-online-crm-tools-to-build-your-brand](https://github.com/user-attachments/assets/8341f3e5-164f-4f98-8b4d-52b1998b8366)
 
-</br>
+
 # CUSTOMER RELATIONSHIP MANAGEMENT </br>
 ## Overview </br>
 The system being developed is a Business ERP (Enterprise Resource Planning) application for managing various business operations, with a focus on employee management and daily report tracking. The system allows employees to submit daily reports, track their attendance with geofencing and facial recognition, and manage client-lead interactions and product orders. Various features have been integrated into the system to facilitate the efficient management of employee performance and business processes. </br>
