@@ -77,7 +77,35 @@ body.hold-transition.login-page {
 }
 
 .image-container-login img {
-    width: 100%; /* Image will fill the container width */
-    height: 100%; /* Image will fill the container height */
-    object-fit: cover; /* Ensures the image covers the container without distortion */
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+body.hold-transition.register-page {
+    background-color: rgb(147, 147, 197);
+}
+
+.image-container-register {
+    width: 500px;
+    height: 300px; /* Set a fixed height */
+    margin-left: -80px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container-register img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.register-logo{
+    color: brown;
+}
+
+.register-box {
+    background-color: blue;
+    margin-bottom: 200px;
 }

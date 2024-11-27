@@ -76,6 +76,6 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.body.style.backgroundColor = "rgb(147, 147, 197)";
     });
-</script>
+    </script>
 
 </x-laravel-ui-adminlte::adminlte-layout>
