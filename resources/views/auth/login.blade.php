@@ -1,9 +1,13 @@
 <x-laravel-ui-adminlte::adminlte-layout>
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <body class="hold-transition login-page">
+    <div class="image-container-login">
+        <img src="{{ asset('images/Benefits-of-Customer-Relationship-Management-1024x683.jpg') }}" alt="Welcome to CustomerCRM">
+    </div>
         <div class="login-box">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+                <h1>CustomerCRM</h1>
             </div>
             <!-- /.login-logo -->
 
@@ -68,4 +72,10 @@
         </div>
         <!-- /.login-box -->
     </body>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.backgroundColor = "rgb(147, 147, 197)";
+    });
+</script>
+
 </x-laravel-ui-adminlte::adminlte-layout>

@@ -18,7 +18,7 @@ body{
     right: 20px; 
     font-size: 40px;
     text-decoration: none; 
-    color: blue; 
+    color: green; 
 }
 .login-link {
     position: absolute; 
@@ -55,6 +55,29 @@ body{
     color: brown;
 }
 
-.home-link{
-    color: green;
+body.hold-transition.login-page {
+    background-color: rgb(147, 147, 197);
+}
+
+.login-logo{
+    color: brown;
+}
+
+.login-box {
+    background-color: blue;
+    margin-bottom: 200px;
+}
+
+.image-container-login {
+    width: 500px;
+    height: 300px; /* Set a fixed height */
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container-login img {
+    width: 100%; /* Image will fill the container width */
+    height: 100%; /* Image will fill the container height */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
 }
