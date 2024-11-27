@@ -35,7 +35,6 @@ body{
     color: green; 
 }
 
-/* custom.css */
 .image-container {
     margin-top: 300px;
     margin-left: 700px;
@@ -54,4 +53,8 @@ body{
     margin-top: 70px;
     font-size: 30px;
     color: brown;
+}
+
+.home-link{
+    color: green;
 }
