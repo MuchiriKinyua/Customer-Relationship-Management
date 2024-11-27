@@ -3,7 +3,7 @@
 
 # CUSTOMER RELATIONSHIP MANAGEMENT </br>
 ## Overview </br>
-The system being developed is a Business ERP (Enterprise Resource Planning) application for managing various business operations, with a focus on employee management and daily report tracking. The system allows employees to submit daily reports, track their attendance with geofencing and facial recognition, and manage client-lead interactions and product orders. Various features have been integrated into the system to facilitate the efficient management of employee performance and business processes. </br>
+The system being developed is a CRM (Customer Relationship Management) application for managing various business operations, with a focus on employee management and daily report tracking. The system allows employees to submit daily reports and manage client-lead interactions and product orders. Various features have been integrated into the system to facilitate the efficient management of employee performance and business processes. </br>
 
 ## Key functionalities include: </br>
 
