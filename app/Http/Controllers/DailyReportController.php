@@ -18,11 +18,12 @@ class DailyReportController extends Controller
 
     public function store(Request $request)
 {
-    // Validate the request
+    // Validate the request, including reCAPTCHA
     $request->validate([
         'employee_id' => 'required|exists:employees,id', // Ensure the employee exists
         'report' => 'required|string',
         'signature' => 'required|string',
+        'g-recaptcha-response' => 'required|recaptcha', // Validate reCAPTCHA
     ]);
 
     // Get the employee information based on the employee_id
