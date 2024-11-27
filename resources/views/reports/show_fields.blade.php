@@ -1,35 +1,41 @@
-<!-- Lead Name Field -->
+<!-- Employee Name Field -->
 <div class="col-sm-12">
-    {!! Form::label('lead_name', 'Lead Name:') !!}
-    <p>{{ $report->lead->full_name ?? 'N/A' }}</p>
+    {!! Form::label('employee_name', 'Employee Name:') !!}
+    <p>{{ $report->employee_name ?? 'N/A' }}</p>
 </div>
 
-<!-- Client Name Field -->
+<!-- Monday Field -->
 <div class="col-sm-12">
-    {!! Form::label('client_name', 'Client Name:') !!}
-    <p>{{ $report->client->full_name ?? 'N/A' }}</p>
+    {!! Form::label('monday', 'Monday:') !!}
+    <p>{{ $report->monday ?? 'N/A' }}</p>
 </div>
 
-<!-- Lead Date Field -->
+<!-- Tuesday Field -->
 <div class="col-sm-12">
-    {!! Form::label('lead_date', 'Lead Date:') !!}
-    <p>{{ $report->lead_date }}</p>
+    {!! Form::label('tuesday', 'Tuesday:') !!}
+    <p>{{ $report->tuesday ?? 'N/A' }}</p>
 </div>
 
-<!-- Client Date Field -->
+<!-- Wednesday Field -->
 <div class="col-sm-12">
-    {!! Form::label('client_date', 'Client Date:') !!}
-    <p>{{ $report->client_date }}</p>
+    {!! Form::label('wednesday', 'Wednesday:') !!}
+    <p>{{ $report->wednesday ?? 'N/A' }}</p>
 </div>
 
-<!-- Product Id Field -->
+<!-- Thursday Field -->
 <div class="col-sm-12">
-    {!! Form::label('product_id', 'Product:') !!}
-    <p>{{ $report->product_id }}</p>
+    {!! Form::label('thursday', 'Thursday:') !!}
+    <p>{{ $report->thursday ?? 'N/A' }}</p>
 </div>
 
-<!-- Quantity Ordered Field -->
+<!-- Friday Field -->
 <div class="col-sm-12">
-    {!! Form::label('quantity_ordered', 'Quantity Ordered:') !!}
-    <p>{{ $report->quantity_ordered }}</p>
+    {!! Form::label('friday', 'Friday:') !!}
+    <p>{{ $report->friday ?? 'N/A' }}</p>
+</div>
+
+<!-- Summary Field -->
+<div class="col-sm-12">
+    {!! Form::label('summary', 'Summary:') !!}
+    <p>{{ $report->summary ?? 'N/A' }}</p>
 </div>

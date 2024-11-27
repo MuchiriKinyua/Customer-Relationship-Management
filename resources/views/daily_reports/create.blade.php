@@ -21,28 +21,23 @@
                 <!-- Employee ID (hidden) -->
                 {!! Form::hidden('employee_id', $employee->id) !!}
 
-                <!-- Day Dropdown -->
+                <!-- Display Current Day (Non-editable) -->
                 <div class="form-group">
-                    {!! Form::label('day', 'Select Day:') !!}
-                    {!! Form::select('day', [
-                        'monday' => 'Monday',
-                        'tuesday' => 'Tuesday',
-                        'wednesday' => 'Wednesday',
-                        'thursday' => 'Thursday',
-                        'friday' => 'Friday'
-                    ], null, ['class' => 'form-control', 'placeholder' => 'Choose a day']) !!}
+                    {!! Form::label('day', 'Today:') !!}
+                    <input type="text" class="form-control" value="{{ \Carbon\Carbon::now()->format('l') }}" disabled>
                 </div>
 
                 <!-- Report Field -->
                 <div class="form-group">
                     {!! Form::label('report', 'Report:') !!}
-                    {!! Form::textarea('report', null, ['class' => 'form-control']) !!}
+                    <!-- Pre-fill the textarea with the existing report if it exists -->
+                    {!! Form::textarea('report', $existingReport->report ?? '', ['class' => 'form-control', 'rows' => 5]) !!}
                 </div>
 
                 <!-- Report Date Field -->
                 <div class="form-group col-sm-6">
                     {!! Form::label('report_date', 'Report Date:') !!}
-                    {!! Form::date('report_date', null, ['class' => 'form-control', 'id' => 'report_date']) !!}
+                    {!! Form::date('report_date', \Carbon\Carbon::now()->format('Y-m-d'), ['class' => 'form-control', 'id' => 'report_date', 'disabled' => 'disabled']) !!}
                 </div>
 
                 <!-- Signature Field -->
@@ -68,4 +63,5 @@
             {!! Form::close() !!}
         </div>
     </div>
+
 @endsection

@@ -20,24 +20,26 @@
         <div class="card">
             <div class="card-body">
                 <dl class="row">
-                    <dt class="col-sm-3">Lead Name</dt>
-                    <dd class="col-sm-9">{{ $report->lead->full_name }}</dd>
+                    <dt class="col-sm-3">Employee Name</dt>
+                    <dd class="col-sm-9">{{ $report->employee_name ?? 'N/A' }}</dd>
 
-                    <dt class="col-sm-3">Client Name</dt>
-                    <dd class="col-sm-9">{{ $report->client->full_name }}</dd>
+                    <dt class="col-sm-3">Monday</dt>
+                    <dd class="col-sm-9">{{ $report->monday ?? 'N/A' }}</dd>
 
-                    <dt class="col-sm-3">Lead Date</dt>
-                    <dd class="col-sm-9">{{ $report->lead_date }}</dd>
+                    <dt class="col-sm-3">Tuesday</dt>
+                    <dd class="col-sm-9">{{ $report->tuesday ?? 'N/A' }}</dd>
 
-                    <dt class="col-sm-3">Client Date</dt>
-                    <dd class="col-sm-9">{{ $report->client_date }}</dd>
+                    <dt class="col-sm-3">Wednesday</dt>
+                    <dd class="col-sm-9">{{ $report->wednesday ?? 'N/A' }}</dd>
 
-                    <dt class="col-sm-3">Product</dt>
-                    <dd class="col-sm-9">{{ $report->product->product_name ?? 'N/A' }}</dd>
+                    <dt class="col-sm-3">Thursday</dt>
+                    <dd class="col-sm-9">{{ $report->thursday ?? 'N/A' }}</dd>
 
-                    <dt class="col-sm-3">Quantity Ordered</dt>
-                    <dd class="col-sm-9">{{ $report->quantity_ordered }}</dd>
+                    <dt class="col-sm-3">Friday</dt>
+                    <dd class="col-sm-9">{{ $report->friday ?? 'N/A' }}</dd>
 
+                    <dt class="col-sm-3">Summary</dt>
+                    <dd class="col-sm-9">{{ $report->summary ?? 'N/A' }}</dd>
                 </dl>
             </div>
         </div>
