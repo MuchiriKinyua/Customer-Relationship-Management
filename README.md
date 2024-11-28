@@ -45,25 +45,19 @@ Client and lead management, ensuring smooth order processing and product selecti
 By automating these processes, the system not only reduces manual errors but also provides detailed reports that assist in decision-making. Employees are now able to submit reports digitally. </br>
 
 ## Recommendations </br>
-Improving Facial Recognition Accuracy: </br>
-
-The system could be enhanced with better facial recognition technology or using a two-factor verification (geolocation and face verification) for more accurate attendance tracking. </br>
 Mobile App Development: </br>
-
 A mobile app version could be developed, allowing employees to mark attendance and submit reports on the go, especially in remote locations. </br>
+
 Weekly and Monthly Reports: </br>
-
 The current system tracks daily reports, but adding a feature for weekly/monthly performance reviews could help managers get a better overview of employee productivity. </br>
+
 Additional User Roles: </br>
-
 Expand the role-based access control to allow more specific permissions, such as creating a role for HR to only view attendance and reports without modifying them. </br>
+
 Integration with HR and Payroll Systems: </br>
-
 Integrate the attendance system with HR and payroll systems, allowing automatic payroll generation based on attendance data. </br>
-ReCAPTCHA: </br>
 
-For added security, make the ReCAPTCHA mandatory for submissions or certain actions to avoid abuse and ensure that only legitimate users can submit reports. </br>
 Enhance the Reporting Features: </br>
-
 Introduce a report approval system, where managers review reports before they are finalized, which will ensure better data validation and reduce errors. </br>
+
 By addressing these recommendations, the system can be enhanced to provide even more value to the organization, improving both employee management and operational efficiency.
