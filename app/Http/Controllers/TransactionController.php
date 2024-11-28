@@ -62,8 +62,15 @@ class TransactionController extends AppBaseController
     {
         $clients = \App\Models\Client::all(); 
         $orders = \App\Models\Order::all();  
+        $paymentMethods = [
+            'credit_card' => 'Credit Card',
+            'mobile_payment' => 'Mpesa',
+            'bank_transfer' => 'Bank Transfer',
+            'cash' => 'Cash',
+        ];
+
     
-        return view('transactions.create', compact('clients', 'orders'));
+        return view('transactions.create', compact('clients', 'orders','paymentMethods'));
     }
     
     

@@ -6,9 +6,14 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\InteractionController;
+use App\Http\Controllers\TransactionController;
 use App\Models\Product;
 use App\Models\Client;
 use App\Models\Lead;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Client\Request as ClientRequest;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -100,6 +105,10 @@ Route::get('/daily-reports/create/{employeeId}/{dayIndex?}', [DailyReportControl
 // View the report for a specific day
 Route::get('/daily-reports/view/{employeeId}/{dayIndex}', [DailyReportController::class, 'viewReport'])->name('daily_reports.view');
 
+Route::get('/transactions/create', [TransactionController::class, 'create']);
+Route::post('/transactions/store', function (Request $request) {
+    return 'Transaction created with payment method: ' . $request->input('payment_method');
+});
 
 
 

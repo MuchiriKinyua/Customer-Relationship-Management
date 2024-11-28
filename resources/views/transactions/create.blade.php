@@ -27,6 +27,13 @@
                     @include('transactions.fields')
                 </div>
 
+                <label for="payment_method">Payment Method:</label>
+        <select id="payment_method" name="payment_method" required>
+            @foreach($paymentMethods as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select><br><br>
+
             </div>
             
 

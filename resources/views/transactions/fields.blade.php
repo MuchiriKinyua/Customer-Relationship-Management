@@ -22,11 +22,12 @@
     </script>
 @endpush
 
-<!-- Payment Method Field -->
+<!-- Payment Method Field 
 <div class="form-group col-sm-6">
     {!! Form::label('payment_method', 'Payment Method:') !!}
     {!! Form::text('payment_method', null, ['class' => 'form-control', 'maxlength' => 20, 'maxlength' => 20]) !!}
 </div>
+-->
 
 <!-- Transaction Reference Field -->
 <div class="form-group col-sm-6">

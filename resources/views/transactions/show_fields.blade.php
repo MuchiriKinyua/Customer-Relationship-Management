@@ -11,11 +11,12 @@
         <p class="text-muted">{{ number_format($transaction->amount_paid, 2) }}</p>
     </div>
 
-    <!-- Payment Date Field -->
+    <!-- Payment Date Field 
     <div class="col-sm-6">
         {!! Form::label('payment_date', 'Payment Date:') !!}
         <p class="text-muted">{{ $transaction->payment_date->format('Y-m-d') ?? 'N/A' }}</p>
     </div>
+   -->
 
     <!-- Payment Method Field -->
     <div class="col-sm-6">
