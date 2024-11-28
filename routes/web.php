@@ -121,6 +121,11 @@ Route::post('/clients/store', function (Request $request) {
     return 'Transaction created with form of contact: ' . $request->input('interactionTypes');
 });
 
+Route::get('daily_reports/create/{employeeId}', [DailyReportController::class, 'create'])->name('daily_reports.create');
+Route::get('daily-reports/{daily_report}/edit', [DailyReportController::class, 'edit'])->name('daily_reports.edit');
+Route::patch('daily-reports/{daily_report}/update', [DailyReportController::class, 'update'])->name('daily_reports.update');
+
+
 
 
 

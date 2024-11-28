@@ -77,14 +77,6 @@
                     {!! Form::date('report_date', \Carbon\Carbon::now()->format('Y-m-d'), ['class' => 'form-control', 'id' => 'report_date', 'disabled' => 'disabled']) !!}
                 </div>
 
-                <!-- Signature Field -->
-                <div class="form-group">
-                    {!! Form::label('signature', 'Signature:') !!}
-                    {!! Form::text('signature', old('signature'), ['class' => 'form-control', 'placeholder' => 'Enter your Full Name']) !!}
-                    @if($errors->has('signature'))
-                        <small class="text-danger">{{ $errors->first('signature') }}</small>
-                    @endif
-                </div>
 
                 <!-- reCAPTCHA -->
                 <!-- <div>

@@ -17,51 +17,51 @@ class DailyReportController extends Controller
     }
 
     public function store(Request $request)
-{
-    // Validate the request, including reCAPTCHA
-    $request->validate([
-        'employee_id' => 'required|exists:employees,id', // Ensure the employee exists
-        'report' => 'required|string',
-        'signature' => 'required|string',
-        //'g-recaptcha-response' => 'required|recaptcha', // Validate reCAPTCHA
-    ]);
-
-    // Get the employee information based on the employee_id
-    $employee = Employee::find($request->employee_id);
-
-    // Get the current day (e.g., "Monday", "Tuesday", etc.)
-    $currentDay = \Carbon\Carbon::now()->format('l'); // Get the full name of the current day (e.g., 'Monday')
-
-    // Check if a report already exists for the employee on the current day
-    $existingReport = DailyReport::where('employee_id', $request->employee_id)
-                                  ->where('day', strtolower($currentDay))
-                                  ->where('report_date', \Carbon\Carbon::now()->format('Y-m-d'))
-                                  ->first();
-
-    if ($existingReport) {
-        // Append the new report to the existing report
-        $existingReport->report .= "\n\n" . $request->report; // Add a new line before appending
-        $existingReport->save();
-    } else {
-        // Create a new daily report if none exists
-        $dailyReport = new DailyReport();
-        $dailyReport->employee_id = $request->employee_id;
-        $dailyReport->report_date = \Carbon\Carbon::now()->format('Y-m-d');
-        $dailyReport->day = strtolower($currentDay);  // Automatically set the current day as the value of the 'day' field
-        $dailyReport->report = $request->report;  // Save the actual report content
-        $dailyReport->save();
+    {
+        // Validate the request, including reCAPTCHA
+        $request->validate([
+            'employee_id' => 'required|exists:employees,id', // Ensure the employee exists
+            'report' => 'required|string',
+        ]);
+        
+        // Sanitize the report content by removing all HTML tags but keep the styles in place
+        $sanitizedReport = strip_tags($request->report, '<b><i><strong><em><u>'); // Allow certain tags like <b>, <i>, <strong>, etc.
+        
+        // Get the current day (e.g., "Monday", "Tuesday", etc.)
+        $currentDay = \Carbon\Carbon::now()->format('l'); // Get the full name of the current day (e.g., 'Monday')
+        
+        // Check if a report already exists for the employee on the current day
+        $existingReport = DailyReport::where('employee_id', $request->employee_id)
+                                      ->where('day', strtolower($currentDay))
+                                      ->where('report_date', \Carbon\Carbon::now()->format('Y-m-d'))
+                                      ->first();
+        
+        if ($existingReport) {
+            // Append the new sanitized report to the existing report
+            $existingReport->report .= "\n\n" . $sanitizedReport; // Add a new line before appending
+            $existingReport->save();
+        } else {
+            // Create a new daily report if none exists
+            $dailyReport = new DailyReport();
+            $dailyReport->employee_id = $request->employee_id;
+            $dailyReport->report_date = \Carbon\Carbon::now()->format('Y-m-d');
+            $dailyReport->day = strtolower($currentDay);  // Automatically set the current day as the value of the 'day' field
+            $dailyReport->report = $sanitizedReport;  // Save the sanitized report content
+            $dailyReport->save();
+        }
+    
+        // Save the report to the reports table (which aggregates the reports)
+        $report = Report::firstOrNew([
+            'employee_id' => $request->employee_id,
+            'report_date' => \Carbon\Carbon::now()->format('Y-m-d'),
+        ]);
+        $report->{$currentDay} = $sanitizedReport;  // Save the sanitized report under the correct day
+        $report->save();
+        
+        return redirect()->route('employees.index')->with('success', 'Successfully added a report, it has been saved.');
     }
-
-    // Save the report to the reports table (which aggregates the reports)
-    $report = Report::firstOrNew([
-        'employee_id' => $request->employee_id,
-        'report_date' => \Carbon\Carbon::now()->format('Y-m-d'),
-    ]);
-    $report->{$currentDay} = $request->report;  // Save the report under the correct day
-    $report->save();
-
-    return redirect()->route('employees.index')->with('success', 'Successfully added a report, it has been saved.');
-}
+    
+    
 
 
     public function viewReport($employeeId)
@@ -100,4 +100,31 @@ class DailyReportController extends Controller
 
         return view('daily_reports.index', compact('reports', 'currentWeekStart', 'currentWeekEnd'));
     }
+
+    public function edit($id)
+{
+    // Retrieve the specific daily report using the ID
+    $dailyReport = DailyReport::findOrFail($id);
+
+    return view('daily_reports.edit', compact('dailyReport'));
+}
+
+public function update(Request $request, $id)
+{
+    // Validate the input
+    $request->validate([
+        'report' => 'required|string',
+    ]);
+
+    // Find the daily report
+    $dailyReport = DailyReport::findOrFail($id);
+
+    // Update the daily report with the provided data
+    $dailyReport->report = $request->report;
+    $dailyReport->save();
+
+    return redirect()->route('employees.index')->with('success', 'Daily Report updated successfully.');
+}
+    
+
 }
