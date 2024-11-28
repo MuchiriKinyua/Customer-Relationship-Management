@@ -24,7 +24,10 @@
                         @endphp
 
                         @if ($report)
-                            <textarea class="form-control" id="report_content_{{ $day }}" rows="5" readonly>{{ $report->report }}</textarea>
+                            <!-- Displaying the report content as HTML -->
+                            <div class="form-control" id="report_content_{{ $day }}">
+                                {!! $report->report !!}
+                            </div>
                             <p><strong>Date:</strong> {{ $report->report_date->format('Y-m-d') }}</p>
                         @else
                             <p>No report available for {{ ucfirst($day) }}.</p>
@@ -35,7 +38,8 @@
                 <!-- Summary Section -->
                 <div class="form-group">
                     <label for="weekly_summary">Weekly Summary:</label>
-                    <textarea class="form-control" id="weekly_summary" rows="5" readonly>{{ $summary }}</textarea>
+                    <!-- Allow HTML rendering in the summary -->
+                    <div class="form-control" id="weekly_summary">{!! $summary !!}</div>
                 </div>
 
             </div>
