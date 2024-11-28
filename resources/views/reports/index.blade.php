@@ -34,16 +34,16 @@
             <div class="row">
                 <!-- Employee Dropdown -->
                 <div class="col-sm-3">
-        <label for="employee_id">Employee</label>
-        <select name="employee_id" id="employee_id" class="form-control">
-            <option value="">Select an Employee</option>
-            @foreach($employees as $employee)
-                <option value="{{ $employee->id }}" {{ request('employee_id') == $employee->id ? 'selected' : '' }}>
-                    {{ $employee->first_name }} {{ $employee->last_name }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+                    <label for="employee_id">Employee</label>
+                    <select name="employee_id" id="employee_id" class="form-control">
+                        <option value="">Select an Employee</option>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->id }}" {{ request('employee_id') == $employee->id ? 'selected' : '' }}>
+                                {{ $employee->first_name }} {{ $employee->last_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <!-- Start Date Field -->
                 <div class="col-sm-3">
@@ -57,13 +57,17 @@
                     <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request()->get('end_date') }}">
                 </div>
 
-                <!-- Type Dropdown -->
+                <!-- Report Type Dropdown for Filtering by Day (Monday to Friday) -->
                 <div class="col-sm-3">
-                    <label for="interaction_type">Type</label>
-                    <select name="interaction_type" id="interaction_type" class="form-control">
+                    <label for="report_type">Report Type</label>
+                    <select name="report_type" id="report_type" class="form-control">
                         <option value="">All</option>
-                        <option value="Lead" {{ request()->get('interaction_type') == 'Lead' ? 'selected' : '' }}>Lead</option>
-                        <option value="Client" {{ request()->get('interaction_type') == 'Client' ? 'selected' : '' }}>Client</option>
+                        <option value="monday" {{ request()->get('report_type') == 'monday' ? 'selected' : '' }}>Monday</option>
+                        <option value="tuesday" {{ request()->get('report_type') == 'tuesday' ? 'selected' : '' }}>Tuesday</option>
+                        <option value="wednesday" {{ request()->get('report_type') == 'wednesday' ? 'selected' : '' }}>Wednesday</option>
+                        <option value="thursday" {{ request()->get('report_type') == 'thursday' ? 'selected' : '' }}>Thursday</option>
+                        <option value="friday" {{ request()->get('report_type') == 'friday' ? 'selected' : '' }}>Friday</option>
+                        <option value="summary" {{ request()->get('report_type') == 'summary' ? 'selected' : '' }}>Summary</option>
                     </select>
                 </div>
             </div>
@@ -77,7 +81,6 @@
         </div>
     </section>
 
-
     <div class="content px-3">
         @include('flash::message')
 
@@ -86,29 +89,34 @@
         <div class="card">
             @include('reports.table') <!-- Include your table partial for the reports list -->
         </div>
-
     </div>
 
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const typeDropdown = document.querySelector('#interaction_type');
+        const typeDropdown = document.querySelector('#report_type');
 
         function filterColumns() {
             const type = typeDropdown.value;
-            const allColumns = document.querySelectorAll('.filterable');
+            const allRows = document.querySelectorAll('.report-row');
 
-            // Hide all columns by default
-            allColumns.forEach(column => column.style.display = 'none');
+            // Hide all rows by default
+            allRows.forEach(row => row.style.display = 'none');
 
-            if (type === 'Lead') {
-                // Show only lead-specific columns
-                document.querySelectorAll('.lead-column, .shared-column').forEach(column => column.style.display = '');
-            } else if (type === 'Client') {
-                // Show only client-specific columns
-                document.querySelectorAll('.client-column, .shared-column').forEach(column => column.style.display = '');
+            if (type === 'monday') {
+                document.querySelectorAll('.monday-row').forEach(row => row.style.display = '');
+            } else if (type === 'tuesday') {
+                document.querySelectorAll('.tuesday-row').forEach(row => row.style.display = '');
+            } else if (type === 'wednesday') {
+                document.querySelectorAll('.wednesday-row').forEach(row => row.style.display = '');
+            } else if (type === 'thursday') {
+                document.querySelectorAll('.thursday-row').forEach(row => row.style.display = '');
+            } else if (type === 'friday') {
+                document.querySelectorAll('.friday-row').forEach(row => row.style.display = '');
+            } else if (type === 'summary') {
+                document.querySelectorAll('.summary-row').forEach(row => row.style.display = '');
             } else {
-                // Show all columns for "All"
-                allColumns.forEach(column => column.style.display = '');
+                // Show all rows for "All"
+                allRows.forEach(row => row.style.display = '');
             }
         }
 
@@ -119,6 +127,4 @@
         typeDropdown.addEventListener('change', filterColumns);
     });
     </script>
-
 @endsection
-

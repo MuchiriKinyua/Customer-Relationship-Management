@@ -6,63 +6,66 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+    // Table name
     public $table = 'reports';
 
+    // Fillable columns
     public $fillable = [
-        'lead_id',       // Foreign key to the lead table
-        'client_id',     // Foreign key to the client table
-        'lead_date',
-        'client_date',
-        'product_id',
-        'quantity_ordered',
-    ];
-
-    protected $casts = [
-        'lead_date' => 'date',
-        'client_date' => 'date',
+        'employee_id',  // Foreign key to the employees table
+        'monday',       // Report for Monday
+        'tuesday',      // Report for Tuesday
+        'wednesday',    // Report for Wednesday
+        'thursday',     // Report for Thursday
+        'friday',       // Report for Friday
+        'summary',      // Weekly summary
+        'report_date', // Date of the report
     ];
 
     // Validation rules
     public static array $rules = [
-        'lead_id' => 'nullable|exists:leads,id',   // Ensuring that the lead exists
-        'client_id' => 'nullable|exists:clients,id', // Ensuring that the client exists
-        'lead_date' => 'nullable|date',
-        'client_date' => 'nullable|date',
-        'product_id' => 'nullable|exists:products,id',
-        'quantity_ordered' => 'nullable|integer|min:1', // Ensure positive integers
-        'created_at' => 'nullable',
-        'updated_at' => 'nullable',
+        'employee_id' => 'required|exists:employees,id', // Ensuring that the employee exists
+        'monday' => 'nullable|string',
+        'tuesday' => 'nullable|string',
+        'wednesday' => 'nullable|string',
+        'thursday' => 'nullable|string',
+        'friday' => 'nullable|string',
+        'summary' => 'nullable|string',
     ];
 
     // Relationships
-    public function lead()
+    public function employee()
     {
-        return $this->belongsTo(Lead::class, 'lead_id');
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 
-    public function client()
+    // Accessors (if any special formatting is required, define them here)
+    public function getMondayAttribute($value)
     {
-        return $this->belongsTo(Client::class, 'client_id');
+        return $value ?? 'No Report'; // Return a default value if no report exists
     }
 
-    public function product()
+    public function getTuesdayAttribute($value)
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $value ?? 'No Report';
     }
 
-    // Accessors
-    public function getLeadDateAttribute($value)
+    public function getWednesdayAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->format('m-d-Y');
+        return $value ?? 'No Report';
     }
 
-    public function getClientDateAttribute($value)
+    public function getThursdayAttribute($value)
     {
-        return \Carbon\Carbon::parse($value)->format('m-d-Y');
+        return $value ?? 'No Report';
     }
 
-    public function getQuantityOrderedAttribute($value)
+    public function getFridayAttribute($value)
     {
-        return number_format($value); // Optional: Format quantity with commas (e.g., 1,000)
+        return $value ?? 'No Report';
+    }
+
+    public function getSummaryAttribute($value)
+    {
+        return $value ?? 'No Summary';
     }
 }
