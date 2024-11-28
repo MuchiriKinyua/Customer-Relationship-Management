@@ -54,13 +54,13 @@
                 </div>
 
                 <!-- reCAPTCHA -->
-                <div>
+                <!-- <div>
                     {!! htmlFormSnippet() !!}
                     @if($errors->has('g-recaptcha-response'))
                         <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
                     @endif
                 </div>
-            </div>
+            </div> -->
 
             <div class="card-footer">
                 {!! Form::submit('Save Report', ['class' => 'btn btn-primary']) !!}
