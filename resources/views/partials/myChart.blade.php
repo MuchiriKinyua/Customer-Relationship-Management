@@ -1,6 +1,5 @@
 
-    
-    <div style="height:200px;width:450px;">
+        <div>
         <canvas id="leadChart"></canvas>
     </div>
 
@@ -128,6 +127,6 @@
     }
 
     myChart('days');
-</script>
+</script> 
 
 

@@ -1,6 +1,5 @@
-<!-- resources/views/partials/chart.blade.php -->
 
-    <div style="height:300px;width:450px;">
+<div style>
         <canvas id="orderChart"></canvas>
     </div>
 
@@ -128,4 +127,4 @@
     }
 
     updateChart('days');
-</script>
+</script> 
