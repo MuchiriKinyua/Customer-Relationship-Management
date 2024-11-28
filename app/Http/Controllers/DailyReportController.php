@@ -23,7 +23,7 @@ class DailyReportController extends Controller
         'employee_id' => 'required|exists:employees,id', // Ensure the employee exists
         'report' => 'required|string',
         'signature' => 'required|string',
-        'g-recaptcha-response' => 'required|recaptcha', // Validate reCAPTCHA
+        //'g-recaptcha-response' => 'required|recaptcha', // Validate reCAPTCHA
     ]);
 
     // Get the employee information based on the employee_id
