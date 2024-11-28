@@ -1,99 +1,101 @@
 <x-laravel-ui-adminlte::adminlte-layout>
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <body class="hold-transition register-page">
+    <body class="hold-transition register-page" style="background: linear-gradient(to right, #7a81ff, #ff758c); color: white;">
+
         <div class="register-box">
-        <div class="image-container-register">
-            <img src="{{ asset('images/3-Damelin-Sep-2024-The-importance-of-Customer-Relationship-Management-CRM-in-Marketing-Management-1536x864.jpg') }}" alt="Welcome to CustomerCRM">
-        </div>
-            <div class="register-logo">
-                <h1>CustomerCRM</h1>
+            <div class="register-logo" style="animation: fadeIn 2s;">
+                <h1 style="font-weight: bold; font-size: 2.5rem;">CustomerCRM</h1>
             </div>
 
-            <div class="card">
-                <div class="card-body register-card-body">
-                    <p class="login-box-msg">Register a new membership</p>
+            <!-- Registration Card -->
+            <div class="card" style="box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); border-radius: 10px;">
+                <div class="card-body register-card-body" style="background-color: #ffffff; border-radius: 10px;">
+                    <p class="login-box-msg" style="font-size: 1.2rem; color: #555;">Register a new membership</p>
 
+                    <!-- Registration Form -->
                     <form method="post" action="{{ route('register') }}">
                         @csrf
 
+                        <!-- Name Field -->
                         <div class="input-group mb-3">
                             <input type="text" name="name"
-                                class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                                placeholder="Full name">
+                                class="form-control @error('name') is-invalid @enderror"
+                                value="{{ old('name') }}" placeholder="Full name" style="border-radius: 25px;">
                             <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-user"></span></div>
+                                <div class="input-group-text" style="background: #7a81ff; color: white; border-radius: 50%;">
+                                    <span class="fas fa-user"></span>
+                                </div>
                             </div>
                             @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
 
+                        <!-- Email Field -->
                         <div class="input-group mb-3">
-                            <input type="email" name="email" value="{{ old('email') }}"
-                                class="form-control @error('email') is-invalid @enderror" placeholder="Email">
+                            <input type="email" name="email"
+                                class="form-control @error('email') is-invalid @enderror"
+                                value="{{ old('email') }}" placeholder="Email" style="border-radius: 25px;">
                             <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-envelope"></span></div>
+                                <div class="input-group-text" style="background: #ff758c; color: white; border-radius: 50%;">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
                             </div>
                             @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
 
+                        <!-- Password Field -->
                         <div class="input-group mb-3">
                             <input type="password" name="password"
-                                class="form-control @error('password') is-invalid @enderror" placeholder="Password">
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="Password" style="border-radius: 25px;">
                             <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                                <div class="input-group-text" style="background: #7a81ff; color: white; border-radius: 50%;">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
                             @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                                <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
 
+                        <!-- Confirm Password Field -->
                         <div class="input-group mb-3">
-                            <input type="password" name="password_confirmation" class="form-control"
-                                placeholder="Retype password">
+                            <input type="password" name="password_confirmation"
+                                class="form-control" placeholder="Retype password" style="border-radius: 25px;">
                             <div class="input-group-append">
-                                <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                                <div class="input-group-text" style="background: #ff758c; color: white; border-radius: 50%;">
+                                    <span class="fas fa-lock"></span>
+                                </div>
                             </div>
                         </div>
 
+                        <!-- Terms Checkbox and Register Button -->
                         <div class="row">
                             <div class="col-8">
                                 <div class="icheck-primary">
                                     <input type="checkbox" id="agreeTerms" name="terms" value="agree">
                                     <label for="agreeTerms">
-                                        I agree to the <a href="#">terms</a>
+                                        I agree to the <a href="#" style="color: #7a81ff;">terms</a>
                                     </label>
                                 </div>
                             </div>
-                            <!-- /.col -->
                             <div class="col-4">
-                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                <button type="submit" class="btn btn-primary btn-block"
+                                    style="background: #7a81ff; border: none; border-radius: 25px;">Register</button>
                             </div>
-                            <!-- /.col -->
                         </div>
                     </form>
 
-                    <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
+                    <!-- Login Redirect -->
+                    <p class="mb-0" style="text-align: center;">
+                        <a href="{{ route('login') }}" class="text-center" style="color: #ff758c;">I already have a membership</a>
+                    </p>
                 </div>
-                <!-- /.form-box -->
-            </div><!-- /.card -->
-
-            <!-- /.form-box -->
+            </div>
         </div>
-        <!-- /.register-box -->
     </body>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        document.body.style.backgroundColor = "rgb(147, 147, 197)";
-    });
-    </script>
 </x-laravel-ui-adminlte::adminlte-layout>
