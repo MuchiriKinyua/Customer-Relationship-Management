@@ -1,5 +1,5 @@
 
-<div style>
+<div class="charts">
         <canvas id="orderChart"></canvas>
     </div>
 

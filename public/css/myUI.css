@@ -1,11 +1,4 @@
-/* h1,i{
-    text-align: center;
-    color:black;
-}
-center
-h4{
-    color:black;
-} */
+
 .item0{
     background-color: white;
     display: grid;
@@ -32,13 +25,13 @@ h4{
   border-radius: 8px;
   padding:20px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: larger;
 }
 
-@media (max-width: 768px){
-  .grid-row{
-    grid-template-columns: 1fr;
-  }
-}
+
 .container1{
     display: grid; 
     grid-template-columns:2fr 1fr;
@@ -47,164 +40,35 @@ h4{
    align-items: end;
    justify-content: end;
 }
-/* .item0{
-    min-height:95px;
-    background-color: white;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    align-self: center;
-  } */
-/* .container{
-    min-height:175px;
-    max-width:895px;
-    display: grid; 
-    grid-template-columns:250px 250px 250px;  
-    gap: 5px; 
-    padding: 5px;
-    background-color:white;
-    margin:5px;
-    align-items: center;
-    justify-content: center;
-} */
-/* .container1{
-    max-width:895px;
-    max-height:400px;
-    display: grid; 
-    grid-template-columns:2fr 1fr;
-    gap: 5px; 
-    padding: 5px;
-    background-color:white;
-    margin:5px;
-    align-items: center;
-    justify-content: center;
-} */
-/* .item1{
-    height: 80px;
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 1px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item2{
-    height: 80px;
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item3{
-    height: 80px;
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item4{
-    height: 80px;
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item5{
-    height: 80px;
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item6{
-    height: 80px;
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item7{
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item8{
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .item9{
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
 
-  /* .item10{
-    background-color: white;
-    border: 1px solid #ddd;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    align-self: center;
-  } */
-  /* .card-body{
-    height: 80px;
-    border: 3px;
-    padding:5px;
-    margin:5px;
-    align-items:center;
-    justify-content:center;   
-  } */
+ .grid-layout {
+   margin-top: 20px;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 1rem;
+ }
+
+ .panel {
+   border: 1px solid #333;
+   border-radius: 0.5rem;
+   padding: 1.5rem;
+ }
+
+
+@media(max-width:300px){
+  .charts{
+    grid-template-columns:repeat(1fr);
+  }
 
  
+}
 
+@media (max-width: 768px) {
+  .grid-row {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-layout {
+    grid-template-columns: 1fr;
+  }
+}

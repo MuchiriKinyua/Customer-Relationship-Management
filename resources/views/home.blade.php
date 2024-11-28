@@ -16,88 +16,87 @@
 
 
     <div class="grid-row">
-     
-            <div class="card-body bg-primary">
-                <p>{{ $totalClients }}</p>
-                <p>Clients</p>
-                <i class="nav-icon fas fa-address-book"></i>
-                <hr>
-                <form action="{{ route('clients.index') }}" method="GET">
-                    <button type="submit" class="btn btn-dark">View clients</button>
-                </form>
-            </div>
-   
-            <div class="card-body bg-danger">
-                <p>{{ $totalProducts }}</p>
-                <p>Products</p>
-                <i class="nav-icon fas fa-shopping-cart fa-2x"></i>
-                <hr>
-                <form action="{{ route('products.index') }}" method="GET">
-                    <button type="submit" class="btn btn-dark">View products</button>
-                </form>
-            </div>
-     
-            <div class="card-body bg-warning">
-                <p>{{ $totalOrders }}</p>
-                <p>Orders</p>
-                <i class="nav-icon fas fa-shopping-basket fa-2x"></i>
-                <hr>
-                <form action="{{ route('orders.index') }}" method="GET">
-                    <button type="submit" class="btn btn-dark">View orders</button>
-                </form>
-            </div>
-      
-            <div class="card-body bg-info">
-                <p>{{ $totalDepartments }}</p>
-                <p>Departments</p>
-                <i class="nav-icon fas fa-users fa-2x"></i>
-                <hr>
-                <form action="{{ route('departments.index') }}" method="GET">
-                    <button type="submit" class="btn btn-dark">View departments</button>
-                </form>
-            </div>
-      
-            <div class="card-body bg-dark">
-                <p>{{ $totalEmployees }}</p>
-                <p>Employees</p>
-                <i class="nav-icon fas fa-user fa-2x"></i>
-                <hr>
-                <form action="{{ route('employees.index') }}" method="GET">
-                    <button type="submit" class="btn btn-dark">View employees</button>
-                </form>
-            </div>
-        
-            <div class="card-body bg-orange">
-                <p>{{ $totalInteractions }}</p>
-                <p>Interactions</p>
-                <i class="nav-icon fas fa-tasks"></i>
-                <hr>
-                <form action="{{ route('interactions.index') }}" method="GET">
-                    <button type="submit" class="btn btn-dark">View interactions</button>
-                </form>
-            </div>
-     
+
+        <div class="card-body bg-primary">
+            <p>{{ $totalClients }}</p>
+            <p>Clients</p>
+            <i class="nav-icon fas fa-address-book fa-2x"></i>
+            <hr>
+            <form action="{{ route('clients.index') }}" method="GET">
+                <button type="submit" class="btn btn-dark">View clients</button>
+            </form>
+        </div>
+
+        <div class="card-body bg-danger">
+            <p>{{ $totalProducts }}</p>
+            <p>Products</p>
+            <i class="nav-icon fas fa-shopping-cart fa-2x"></i>
+            <hr>
+            <form action="{{ route('products.index') }}" method="GET">
+                <button type="submit" class="btn btn-dark">View products</button>
+            </form>
+        </div>
+
+        <div class="card-body bg-warning">
+            <p>{{ $totalOrders }}</p>
+            <p>Orders</p>
+            <i class="nav-icon fas fa-shopping-basket fa-2x"></i>
+            <hr>
+            <form action="{{ route('orders.index') }}" method="GET">
+                <button type="submit" class="btn btn-dark">View orders</button>
+            </form>
+        </div>
+
+        <div class="card-body bg-info">
+            <p>{{ $totalDepartments }}</p>
+            <p>Departments</p>
+            <i class="nav-icon fas fa-users fa-2x"></i>
+            <hr>
+            <form action="{{ route('departments.index') }}" method="GET">
+                <button type="submit" class="btn btn-dark">View departments</button>
+            </form>
+        </div>
+
+        <div class="card-body bg-dark">
+            <p>{{ $totalEmployees }}</p>
+            <p>Employees</p>
+            <i class="nav-icon fas fa-user fa-2x"></i>
+            <hr>
+            <form action="{{ route('employees.index') }}" method="GET">
+                <button type="submit" class="btn btn-dark">View employees</button>
+            </form>
+        </div>
+
+        <div class="card-body bg-orange">
+            <p>{{ $totalInteractions }}</p>
+            <p>Interactions</p>
+            <i class="nav-icon fas fa-tasks fa-2x"></i>
+            <hr>
+            <form action="{{ route('interactions.index') }}" method="GET">
+                <button type="submit" class="btn btn-dark">View interactions</button>
+            </form>
+        </div>
+
     </div>
 
-
-
-    <div class="container1">
-        <div class="item7">
+    <div class="grid-layout">
+        <div class="panel">
             @include('partials.chart')
         </div>
 
-        <div class="item8">
+        <div class="panel circle-container">
             @include('partials.infoChart')
         </div>
 
-        <div class="item9">
+        <div class="panel">
             @include('partials.myChart')
         </div>
-
-        <div class="item10">
+      
+        <div class="panel circle-container">
             @include('partials.summaryChart')
         </div>
     </div>
+</div>
 </div>
 
 @endsection

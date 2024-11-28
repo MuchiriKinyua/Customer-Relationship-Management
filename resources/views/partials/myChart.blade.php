@@ -1,5 +1,5 @@
 
-        <div>
+        <div class="charts">
         <canvas id="leadChart"></canvas>
     </div>
 
