@@ -83,6 +83,13 @@
                         @endforeach
                     </select>
                 </div>
+      <!--Type of interaction dropdown-->
+                <label for="interactionTypes">Form of contact</label>
+        <select id="interactionTypes" name="interactionTypes" required>
+            @foreach($interactionTypes as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select><br><br>
 
                 <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

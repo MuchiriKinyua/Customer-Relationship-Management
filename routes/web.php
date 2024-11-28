@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\OrderController;
@@ -105,9 +106,19 @@ Route::get('/daily-reports/create/{employeeId}/{dayIndex?}', [DailyReportControl
 // View the report for a specific day
 Route::get('/daily-reports/view/{employeeId}/{dayIndex}', [DailyReportController::class, 'viewReport'])->name('daily_reports.view');
 
-Route::get('/transactions/create', [TransactionController::class, 'create']);
+Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
 Route::post('/transactions/store', function (Request $request) {
     return 'Transaction created with payment method: ' . $request->input('payment_method');
+});
+
+Route::get('/leads/create', [LeadController::class, 'create'])->name('leads.create');
+Route::post('/leads/store', function (Request $request) {
+    return 'Lead created with form of contact: ' . $request->input('interactionTypes');
+});
+
+Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
+Route::post('/clients/store', function (Request $request) {
+    return 'Transaction created with form of contact: ' . $request->input('interactionTypes');
 });
 
 

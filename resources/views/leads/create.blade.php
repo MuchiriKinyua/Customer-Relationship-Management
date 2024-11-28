@@ -92,6 +92,13 @@
                     </select>
                 </div>
 
+                <label for="interactionTypes">Form of contact</label>
+        <select id="interactionTypes" name="interactionTypes" required>
+            @foreach($interactionTypes as $key => $value)
+                <option value="{{ $key }}">{{ $value }}</option>
+            @endforeach
+        </select><br><br>
+
 
 
                 <!-- Container for Dynamic Quantities -->
@@ -101,6 +108,9 @@
 
                 <button type="submit" class="btn btn-primary">Save Lead</button>
                 <a href="{{ route('leads.index') }}" class="btn btn-default"> Cancel </a>
+
+             
+
             </form>
         </div>
     </div>

@@ -26,7 +26,7 @@
                 <div class="row">
                     @include('transactions.fields')
                 </div>
-
+          <!--Dropdown for payment method-->
                 <label for="payment_method">Payment Method:</label>
         <select id="payment_method" name="payment_method" required>
             @foreach($paymentMethods as $key => $value)

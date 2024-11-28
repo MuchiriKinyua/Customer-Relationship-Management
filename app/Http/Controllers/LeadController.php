@@ -71,7 +71,14 @@ class LeadController extends AppBaseController
     {
         $employees = Employee::all();  // Get all employees
         $products = Product::all();    // Get all products
-        return view('leads.create', compact('employees', 'products'));  // Pass employees and products to the view
+        $interactionTypes = [
+            'phone' => 'Call',
+            'email' => 'Email',
+            'referral' => 'Referral',
+            'social media' => 'Social Media',
+        ];
+
+        return view('leads.create', compact('employees', 'products','interactionTypes'));  // Pass employees and products to the view
     }
     
 

@@ -65,7 +65,14 @@ public function index(Request $request)
         // Fetch all leads and pass them to the view
         $employees = Employee::all(); 
         $leads = \App\Models\Lead::all();
-        return view('clients.create', compact('employees', 'leads'));  
+        $interactionTypes = [
+            'phone' => 'Call',
+            'email' => 'Email',
+            'referral' => 'Referral',
+            'social media' => 'Social Media',
+        ];
+
+        return view('clients.create', compact('employees', 'leads','interactionTypes'));  
     }
 
     /**
