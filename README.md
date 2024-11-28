@@ -25,16 +25,15 @@ Ensure lead-to-client and order-to-product management is smooth and transparent,
 
 ## Specific Objectives </br>
 Daily Report Submission: </br>
-
 Enable employees to submit reports for specific days (Monday to Friday). </br>
 Store daily reports for each employee, allowing managers to review them based on specific dates. </br>
 Provide an option to view reports for the entire week with a combined summary. </br>
-Lead and Client Management: </br>
 
+Lead and Client Management: </br>
 Implement a system to track leads and associate them with products, employees, and clients. </br>
 Allow employees to update product and client details when making orders, ensuring that the correct products are linked to leads and clients. </br>
-User Experience: </br>
 
+User Experience: </br>
 Provide an intuitive interface for employees to submit reports and for admins to manage and review them. </br>
 
 ## Conclusions </br>
