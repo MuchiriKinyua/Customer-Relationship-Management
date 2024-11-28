@@ -9,6 +9,7 @@ use App\Repositories\ReportRepository;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Report;
+use App\Models\DailyReport;  
 use Flash;
 
 class ReportController extends AppBaseController
@@ -25,36 +26,41 @@ class ReportController extends AppBaseController
      * Display a listing of the Report.
      */
     public function index(Request $request)
-    {
-        $query = Report::query();
+{
+    $query = Report::query();
+    
+    // Filter reports based on search input (e.g., employee, day of the week)
+    if ($request->has('search')) {
+        $search = $request->get('search');
 
-        // Filter reports based on search input (e.g., employee, day of the week)
-        if ($request->has('search')) {
-            $search = $request->get('search');
-
-            $query->where(function ($q) use ($search) {
-                $q->orWhereHas('employee', function($q) use ($search) {
-                    $q->where('full_name', 'like', "%$search%");
-                })
-                ->orWhere('day_of_week', 'like', "%$search%")
-                ->orWhere('report_details', 'like', "%$search%")
-                ->orWhere('report_date', 'like', "%$search%");
-            });
-        }
-
-        // Get the reports with the necessary relationships (employee)
-        $reports = $query->with('employee')->paginate(10);
-
-        // Fetch the list of employees for the dropdown
-        $employees = Employee::all();
-
-        // Return the view with reports and employees
-        return view('reports.index', compact('reports', 'employees'));
+        $query->where(function ($q) use ($search) {
+            $q->orWhereHas('employee', function($q) use ($search) {
+                $q->where('full_name', 'like', "%$search%");
+            })
+            ->orWhere('day_of_week', 'like', "%$search%")
+            ->orWhere('report_details', 'like', "%$search%")
+            ->orWhere('report_date', 'like', "%$search%");
+        });
     }
+    
+    // Filter reports based on is_submitted from the related 'daily_reports' table
+    $query->whereIn('reports.id', function($q) {
+        $q->select('daily_reports.report_id') // Ensure to select the correct column name from daily_reports
+          ->from('daily_reports')
+          ->where('is_submitted', true); // Only include reports that have been submitted
+    });
+    
+    // Get the reports with the necessary relationships (employee)
+    $reports = $query->with('employee')->paginate(10);
+    
+    // Fetch the list of employees for the dropdown
+    $employees = Employee::all();
+    
+    // Return the view with reports and employees
+    return view('reports.index', compact('reports', 'employees'));
+}
 
-    /**
-     * Show the form for creating a new Report.
-     */
+
     public function create()
     {
         // Fetch all employees for the dropdown

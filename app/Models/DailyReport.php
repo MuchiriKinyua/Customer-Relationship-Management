@@ -22,6 +22,7 @@ class DailyReport extends Model
         'day',         
         'report',       
         'report_date',  
+        'report_id',
     ];
 
     protected $casts = [

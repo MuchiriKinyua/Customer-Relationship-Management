@@ -68,4 +68,12 @@ class Report extends Model
     {
         return $value ?? 'No Summary';
     }
+
+    // In the Report model
+
+public function dailyReports()
+{
+    return $this->hasMany(DailyReport::class);
+}
+
 }

@@ -124,6 +124,8 @@ Route::post('/clients/store', function (Request $request) {
 Route::get('daily_reports/create/{employeeId}', [DailyReportController::class, 'create'])->name('daily_reports.create');
 Route::get('daily-reports/{daily_report}/edit', [DailyReportController::class, 'edit'])->name('daily_reports.edit');
 Route::patch('daily-reports/{daily_report}/update', [DailyReportController::class, 'update'])->name('daily_reports.update');
+Route::delete('daily_reports/{id}', [DailyReportController::class, 'destroy'])->name('daily_reports.destroy');
+Route::post('/daily-reports/{daily_report}/submit', [DailyReportController::class, 'submitReport'])->name('daily_reports.submit');
 
 
 

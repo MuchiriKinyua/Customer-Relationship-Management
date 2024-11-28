@@ -9,91 +9,104 @@ use Illuminate\Http\Request;
 
 class DailyReportController extends Controller
 {
+    /**
+     * Show form to create a new daily report.
+     */
     public function create($employeeId)
     {
         $employee = Employee::findOrFail($employeeId);
-
         return view('daily_reports.create', compact('employee'));
     }
 
+    /**
+     * Store a new daily report.
+     */
     public function store(Request $request)
-    {
-        // Validate the request, including reCAPTCHA
-        $request->validate([
-            'employee_id' => 'required|exists:employees,id', // Ensure the employee exists
-            'report' => 'required|string',
-        ]);
-        
-        // Sanitize the report content by removing all HTML tags but keep the styles in place
-        $sanitizedReport = strip_tags($request->report, '<b><i><strong><em><u>'); // Allow certain tags like <b>, <i>, <strong>, etc.
-        
-        // Get the current day (e.g., "Monday", "Tuesday", etc.)
-        $currentDay = \Carbon\Carbon::now()->format('l'); // Get the full name of the current day (e.g., 'Monday')
-        
-        // Check if a report already exists for the employee on the current day
-        $existingReport = DailyReport::where('employee_id', $request->employee_id)
-                                      ->where('day', strtolower($currentDay))
-                                      ->where('report_date', \Carbon\Carbon::now()->format('Y-m-d'))
-                                      ->first();
-        
-        if ($existingReport) {
-            // Append the new sanitized report to the existing report
-            $existingReport->report .= "\n\n" . $sanitizedReport; // Add a new line before appending
-            $existingReport->save();
-        } else {
-            // Create a new daily report if none exists
-            $dailyReport = new DailyReport();
-            $dailyReport->employee_id = $request->employee_id;
-            $dailyReport->report_date = \Carbon\Carbon::now()->format('Y-m-d');
-            $dailyReport->day = strtolower($currentDay);  // Automatically set the current day as the value of the 'day' field
-            $dailyReport->report = $sanitizedReport;  // Save the sanitized report content
-            $dailyReport->save();
-        }
-    
-        // Save the report to the reports table (which aggregates the reports)
-        $report = Report::firstOrNew([
+{
+    // Validate the request
+    $request->validate([
+        'employee_id' => 'required|exists:employees,id',
+        'report' => 'required|string',
+    ]);
+
+    // Sanitize the report content
+    $sanitizedReport = strip_tags($request->report, '<b><i><strong><em><u>');
+
+    // Get current day and date
+    $currentDay = strtolower(now()->format('l'));
+    $currentDate = now()->format('Y-m-d');
+
+    // Check if a report already exists
+    $existingReport = DailyReport::where('employee_id', $request->employee_id)
+        ->where('day', $currentDay)
+        ->where('report_date', $currentDate)
+        ->first();
+
+    if ($existingReport) {
+        // Append to the existing report
+        $existingReport->report .= "\n\n" . $sanitizedReport;
+        $existingReport->save();
+    } else {
+        // Create a new daily report
+        DailyReport::create([
             'employee_id' => $request->employee_id,
-            'report_date' => \Carbon\Carbon::now()->format('Y-m-d'),
+            'report_date' => $currentDate,
+            'day' => $currentDay,
+            'report' => $sanitizedReport,
+            'report_id' => $this->getOrCreateReport($request->employee_id, $currentDate) // Assign the report_id here
         ]);
-        $report->{$currentDay} = $sanitizedReport;  // Save the sanitized report under the correct day
-        $report->save();
-        
-        return redirect()->route('employees.index')->with('success', 'Successfully added a report, it has been saved.');
     }
-    
-    
 
+    // Update the aggregated report table
+    $report = Report::firstOrNew([
+        'employee_id' => $request->employee_id,
+        'report_date' => $currentDate,
+    ]);
+    $report->{ucfirst($currentDay)} = $sanitizedReport; // e.g., 'Monday'
+    $report->save();
 
+    return redirect()->route('employees.index')->with('success', 'Report successfully added and saved.');
+}
+
+// Helper method to create or fetch the report and get its ID
+private function getOrCreateReport($employeeId, $reportDate)
+{
+    $report = Report::firstOrNew([
+        'employee_id' => $employeeId,
+        'report_date' => $reportDate,
+    ]);
+    $report->save(); // Ensure it gets saved
+    return $report->id; // Return the report_id
+}
+
+    /**
+     * View reports for a specific employee.
+     */
     public function viewReport($employeeId)
     {
-        // Retrieve the employee and the daily reports for the week
         $employee = Employee::findOrFail($employeeId);
 
-        // Define the days of the week
+        // Fetch reports for each day of the week
         $days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-        
-        // Fetch the reports for each day of the week for the specified employee
         $reports = DailyReport::where('employee_id', $employeeId)
-                              ->whereIn('day', $days)
-                              ->get()
-                              ->keyBy('day'); // This will return the reports indexed by day (monday, tuesday, etc.)
+            ->whereIn('day', $days)
+            ->get()
+            ->keyBy('day'); // Key by day for easy access
 
-        // Create a summary of the reports
-        $summary = $reports->map(function ($report) {
-            return $report->report;
-        })->implode("\n\n"); // Combining reports with a new line between each day
+        // Summarize reports into a single string
+        $summary = $reports->map(fn($report) => $report->report)->implode("\n\n");
 
-        // Pass the data to the view
         return view('daily_reports.view', compact('employee', 'reports', 'days', 'summary'));
     }
 
+    /**
+     * List all reports for the current week.
+     */
     public function index()
     {
-        // Display the list of reports for all employees, filtered by the current week
-        $currentWeekStart = \Carbon\Carbon::now()->startOfWeek();
-        $currentWeekEnd = \Carbon\Carbon::now()->endOfWeek();
+        $currentWeekStart = now()->startOfWeek();
+        $currentWeekEnd = now()->endOfWeek();
 
-        // Fetch all reports for the current week
         $reports = DailyReport::whereBetween('report_date', [$currentWeekStart, $currentWeekEnd])
             ->orderBy('report_date')
             ->get();
@@ -101,30 +114,86 @@ class DailyReportController extends Controller
         return view('daily_reports.index', compact('reports', 'currentWeekStart', 'currentWeekEnd'));
     }
 
+    /**
+     * Show form to edit a daily report.
+     */
     public function edit($id)
+    {
+        $dailyReport = DailyReport::findOrFail($id);
+        return view('daily_reports.edit', compact('dailyReport'));
+    }
+
+    /**
+     * Update an existing daily report.
+     */
+    public function update(Request $request, $id)
+    {
+        // Validate input
+        $request->validate([
+            'report' => 'required|string',
+        ]);
+
+        // Sanitize the report content
+        $sanitizedReport = strip_tags($request->report, '<b><i><strong><em><u>');
+
+        // Update the daily report
+        $dailyReport = DailyReport::findOrFail($id);
+        $dailyReport->report = $sanitizedReport;
+        $dailyReport->save();
+
+        // Update the reports table
+        $report = Report::where('employee_id', $dailyReport->employee_id)
+            ->where('report_date', $dailyReport->report_date)
+            ->first();
+
+        if ($report) {
+            $day = ucfirst($dailyReport->day); // e.g., 'Monday'
+            $report->{$day} = $sanitizedReport;
+            $report->save();
+        }
+
+        return redirect()->route('employees.index')->with('success', 'Report updated successfully.');
+    }
+
+    /**
+     * Delete a daily report.
+     */
+    public function destroy($id)
+    {
+        $dailyReport = DailyReport::findOrFail($id);
+        $employeeId = $dailyReport->employee_id;
+        $day = ucfirst($dailyReport->day);
+
+        // Delete the daily report
+        $dailyReport->delete();
+
+        // Update or delete the reports table entry
+        $report = Report::where('employee_id', $employeeId)
+            ->where('report_date', $dailyReport->report_date)
+            ->first();
+
+        if ($report) {
+            $report->{$day} = null;
+
+            // Check if all days are empty and delete if so
+            if (collect($report->only(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']))->filter()->isEmpty()) {
+                $report->delete();
+            } else {
+                $report->save();
+            }
+        }
+
+        return redirect()->route('employees.index')->with('success', 'Report deleted successfully.');
+    }
+
+
+    public function submitReport($id)
 {
-    // Retrieve the specific daily report using the ID
-    $dailyReport = DailyReport::findOrFail($id);
+    $report = DailyReport::findOrFail($id);
+    $report->is_submitted = true; // Set the report as submitted
+    $report->save();
 
-    return view('daily_reports.edit', compact('dailyReport'));
+    return redirect()->back()->with('success', 'Report submitted successfully!');
 }
-
-public function update(Request $request, $id)
-{
-    // Validate the input
-    $request->validate([
-        'report' => 'required|string',
-    ]);
-
-    // Find the daily report
-    $dailyReport = DailyReport::findOrFail($id);
-
-    // Update the daily report with the provided data
-    $dailyReport->report = $request->report;
-    $dailyReport->save();
-
-    return redirect()->route('employees.index')->with('success', 'Daily Report updated successfully.');
-}
-    
 
 }
