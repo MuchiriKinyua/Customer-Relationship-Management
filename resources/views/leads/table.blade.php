@@ -6,7 +6,7 @@
                     <th>Full Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Source</th>
+                   <!-- <th>Source</th>-->
                     <th>Status</th>
                     <th>Employee</th>
                     <th>Products</th>
@@ -30,8 +30,9 @@
                         <!-- Phone Number -->
                         <td>{{ $lead->phone_number ?? 'No Phone' }}</td>
 
-                        <!-- Source -->
+                        <!-- Source 
                         <td>{{ $lead->source ?? 'No Source' }}</td>
+                        -->
 
                         <!-- Status -->
                         <td>{{ $lead->status ?? 'No Status' }}</td>

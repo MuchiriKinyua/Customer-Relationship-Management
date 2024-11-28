@@ -33,10 +33,10 @@
                         <p>{{ $lead->phone_number }}</p>
                     </div>
 
-                    <div class="col-sm-12">
+                  <!--  <div class="col-sm-12">
                         {!! Form::label('source', 'Source:') !!}
                         <p>{{ $lead->source }}</p>
-                    </div>
+                    </div> -->
 
                     <div class="col-sm-12">
                         {!! Form::label('description', 'Description:') !!}
