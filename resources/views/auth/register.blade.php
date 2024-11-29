@@ -1,11 +1,14 @@
 <x-laravel-ui-adminlte::adminlte-layout>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <body class="hold-transition register-page"
+        style="background: linear-gradient(to right, rgba(122, 129, 255, 0.7), rgba(255, 117, 140, 0.7)), 
+        url('{{ asset('images/background.png') }}') no-repeat center center fixed; background-size: cover; color: white;">
 
-    <body class="hold-transition register-page" style="background: linear-gradient(to right, #7a81ff, #ff758c); color: white;">
-
-        <div class="register-box">
+        <div class="register-box" style="background: rgba(255, 255, 255, 0.85); border-radius: 15px; box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3); padding: 20px;">
             <div class="register-logo" style="animation: fadeIn 2s;">
-                <h1 style="font-weight: bold; font-size: 2.5rem;">CustomerCRM</h1>
+                <h1 style="font-weight: bold; font-size: 2.5rem; color: #7a81ff;">CustomerCRM</h1>
             </div>
 
             <!-- Registration Card -->
@@ -71,6 +74,14 @@
                                     <span class="fas fa-lock"></span>
                                 </div>
                             </div>
+                        </div>
+
+                        <!-- reCAPTCHA -->
+                        <div>
+                            {!! htmlFormSnippet() !!}
+                            @if($errors->has('g-recaptcha-response'))
+                                <small class="text-danger">{{ $errors->first('g-recaptcha-response') }}</small>
+                            @endif
                         </div>
 
                         <!-- Terms Checkbox and Register Button -->

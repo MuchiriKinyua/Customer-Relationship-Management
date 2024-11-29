@@ -68,12 +68,7 @@ body.hold-transition.login-page {
     background-color: rgb(147, 147, 197);
 }
 
-.login-logo{
-    color: brown;
-}
-
 .login-box {
-    background-color: blue;
     margin-bottom: 200px;
 }
 

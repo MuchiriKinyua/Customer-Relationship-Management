@@ -1,11 +1,13 @@
 <x-laravel-ui-adminlte::adminlte-layout>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-    <body class="hold-transition login-page" style="background: linear-gradient(to right, #ff758c, #7a81ff); color: white;">
+    <body class="hold-transition login-page"
+        style="background: linear-gradient(to right, rgba(122, 129, 255, 0.7), rgba(255, 117, 140, 0.7)), 
+        url('{{ asset('storage/backgrounds/login-background.png') }}') no-repeat center center/cover; 
+        color: white;">
 
         <div class="login-box">
             <div class="login-logo" style="animation: fadeIn 2s;">
-                <h1 style="font-weight: bold; font-size: 2.5rem;">CustomerCRM</h1>
             </div>
 
             <!-- Card -->
