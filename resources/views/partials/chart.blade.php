@@ -1,5 +1,7 @@
 
 <div class="charts">
+
+
         <canvas id="orderChart"></canvas>
     </div>
 
@@ -97,7 +99,7 @@
                         }
                     },
                     beginAtZero: true,
-                    suggestedMax: Math.max(...data) + 3,
+                    suggestedMax: Math.max(...data) + 8,
                     grid: {
                         color: 'rgba(200, 200, 200, 0.2)',
                         lineWidth: 1
