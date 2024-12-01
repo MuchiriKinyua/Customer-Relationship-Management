@@ -84,7 +84,7 @@
             @include('partials.chart')
         </div>
 
-        <div class="panel circle-container">
+        <div class="panel">
             @include('partials.infoChart')
         </div>
 
@@ -92,7 +92,7 @@
             @include('partials.myChart')
         </div>
       
-        <div class="panel circle-container">
+        <div class="panel">
             @include('partials.summaryChart')
         </div>
     </div>
