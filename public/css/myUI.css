@@ -56,9 +56,9 @@
    border: 1px solid #333;
    border-radius: 0.5rem;
    padding: 1.5rem;
-   align-content:center;
+   align-content:space-around;
    max-width:100%;
-   align-self: center;
+   align-self:center ;
  }
 
 @media(max-width:400px){
