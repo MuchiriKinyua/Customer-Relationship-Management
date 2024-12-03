@@ -1,6 +1,6 @@
 <!-- Lead Full Name Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('lead_full_name', 'Lead Full Name:') !!}
+    {!! Form::label('lead_full_name', 'Full Name:') !!}
     {!! Form::text('lead_full_name', isset($lead) ? $lead->full_name : null,  ['class' => 'form-control', 'maxlength' => 255, 'placeholder' => 'Enter lead name', 'readonly' => isset($lead)]) !!}
 </div>
 
