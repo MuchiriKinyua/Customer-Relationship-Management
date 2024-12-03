@@ -384,7 +384,7 @@ public function byLead($lead_id)
         // Get all orders made by this lead
         $orders = Order::where('lead_id', $lead_id)->get();
 
-        return view('orders.by_Lead', compact('orders', 'lead'));
+        return view('orders.by_lead', compact('orders', 'lead'));
     }
 
 }

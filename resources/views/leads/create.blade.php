@@ -28,11 +28,6 @@
                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                 </div>
                 
-                <!-- Source Field 
-                <div class="form-group">
-                    <label for="source">Source</label>
-                    <input type="text" placeholder="Call/Email/Referral" name="source" id="source" class="form-control" value="{{ old('source') }}">
-                </div> -->
 
                 <!-- Phone Number Field -->
                 <div class="form-group">
@@ -45,23 +40,6 @@
                     <label for="description">Description</label>
                     <textarea name="description" id="description" class="form-control">{{ old('description') }}</textarea>
                 </div>
-
-                <!-- Product Dropdown -->
-                <!-- <select name="product_id" id="product_id" class="form-control" required>
-                    <option value="">Select a Product</option>
-                    @foreach($products as $product)
-                        <option value="{{ $product->id }}" {{ old('product_id') == $product->id ? 'selected' : '' }}>
-                            {{ $product->product_name }}
-                        </option>
-                    @endforeach
-                </select> -->
-                
-
-                <!-- Quantity Field -->
-                <!-- <div class="form-group">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" name="quantity" id="quantity" class="form-control" min="1" value="{{ old('quantity', 1) }}" required>
-                </div> -->
 
                 <!-- Lead Date Field -->
                 <div class="form-group">

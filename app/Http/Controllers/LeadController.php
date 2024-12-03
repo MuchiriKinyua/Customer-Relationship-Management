@@ -131,11 +131,6 @@ class LeadController extends AppBaseController
     
         // Validate input data
         $data = $request->validate([
-            'full_name' => 'nullable|string|max:100',
-            'email' => 'required|string|max:30',
-            'phone_number' => 'nullable',
-            'source' => 'nullable|string|max:30',
-            'status' => 'nullable|string|max:30',
             'employee_id' => 'nullable|exists:employees,id',
             'description' => 'nullable|string|max:65535',
             'lead_date' => 'nullable|date',
@@ -145,22 +140,27 @@ class LeadController extends AppBaseController
             'quantities.*' => 'integer|min:1',
         ]);
     
-        // Update the lead's basic details
-        $lead->update($data);
+        // Update only specific fields
+        $lead->employee_id = $data['employee_id'] ?? $lead->employee_id;
+        $lead->description = $data['description'] ?? $lead->description;
+        $lead->lead_date = $data['lead_date'] ?? $lead->lead_date;
     
-        // Sync the products with quantities in the pivot table
+        $lead->save();
+    
+        // Maintain existing product logic
         $products = $request->input('products', []);
         $quantities = $request->input('quantities', []);
     
         $productData = [];
         foreach ($products as $productId) {
-            $productData[$productId] = ['quantity' => $quantities[$productId] ?? 1]; // Default to 1 if no quantity provided
+            $productData[$productId] = ['quantity' => $quantities[$productId] ?? 1];
         }
     
         $lead->products()->sync($productData);
     
         return redirect()->route('leads.index')->with('success', 'Lead updated successfully.');
     }
+    
     
 
     
@@ -295,35 +295,37 @@ class LeadController extends AppBaseController
     
     
 
-public function storeDetails(Request $request, $id)
-{
-    $lead = Lead::findOrFail($id);
-
-    $validatedData = $request->validate([
-        'description' => 'required|string|max:65535',
-        'lead_date' => 'required|date',
-        'employee_id' => 'nullable|exists:employees,id',
-        'products' => 'required|array',
-        'products.*' => 'exists:products,id',
-        'quantities' => 'required|array',
-        'quantities.*' => 'integer|min:1',
-        'interactionTypes' => 'required|string|max:255',
-    ]);
-
-    // Attach products with quantities
-    foreach ($validatedData['products'] as $productId) {
-        $quantity = $validatedData['quantities'][$productId] ?? 1;
-        $lead->products()->attach($productId, ['quantity' => $quantity]);
+    public function storeDetails(Request $request, $id)
+    {
+        $lead = Lead::findOrFail($id);
+    
+        $validatedData = $request->validate([
+            'description' => 'required|string|max:65535',
+            'lead_date' => 'required|date',
+            'employee_id' => 'nullable|exists:employees,id',
+            'products' => 'required|array',
+            'products.*' => 'exists:products,id',
+            'quantities' => 'required|array',
+            'quantities.*' => 'integer|min:1',
+            'interactionTypes' => 'required|string|max:255',
+        ]);
+    
+        // Update specific fields
+        $lead->description = $validatedData['description'];
+        $lead->lead_date = $validatedData['lead_date'];
+        $lead->employee_id = $validatedData['employee_id'];
+        $lead->interaction_type = $validatedData['interactionTypes'];
+        $lead->save();
+        
+    
+        // Maintain existing product logic
+        foreach ($validatedData['products'] as $productId) {
+            $quantity = $validatedData['quantities'][$productId] ?? 1;
+            $lead->products()->attach($productId, ['quantity' => $quantity]);
+        }
+    
+        return redirect()->route('leads.index')->with('success', 'Details added to lead successfully.');
     }
-
-    // Update other details
-    $lead->description = $validatedData['description'];
-    $lead->lead_date = $validatedData['lead_date'];
-    $lead->employee_id = $validatedData['employee_id'];
-    $lead->interaction_type = $validatedData['interactionTypes'];
-    $lead->save();
-
-    return redirect()->route('leads.index')->with('success', 'Details added to lead successfully.');
-}
+    
 
 }
