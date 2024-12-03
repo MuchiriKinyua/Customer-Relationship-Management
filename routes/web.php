@@ -132,6 +132,10 @@ Route::post('/leads/{lead}/add-details', [App\Http\Controllers\LeadController::c
 Route::get('/leads/{id}/add-details', [LeadController::class, 'addDetails'])->name('leads.add_details');
 
 
+Route::get('orders/lead/{leadId}', [OrderController::class, 'byLead'])->name('orders.byLead');
+Route::get('orders/client/{client_id}', [OrderController::class, 'byClient'])->name('orders.byClient');
+
+
 
 
 

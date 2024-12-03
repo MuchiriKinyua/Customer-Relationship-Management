@@ -365,4 +365,26 @@ class OrderController extends AppBaseController
         return redirect(route('orders.index'));
     }
 
+
+
+    public function byClient($clientId)
+{
+    $client = Client::findOrFail($clientId);
+    $orders = Order::where('client_id', $clientId)->with('products')->get();
+
+    return view('orders.by_client', compact('client', 'orders'));
+}
+
+
+public function byLead($lead_id)
+    {
+        // Fetch the lead
+        $lead = Lead::findOrFail($lead_id);
+        
+        // Get all orders made by this lead
+        $orders = Order::where('lead_id', $lead_id)->get();
+
+        return view('orders.by_Lead', compact('orders', 'lead'));
+    }
+
 }
