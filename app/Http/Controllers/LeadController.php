@@ -69,17 +69,24 @@ class LeadController extends AppBaseController
      */
     public function create()
     {
-        $employees = Employee::all();  // Get all employees
-        $products = Product::all();    // Get all products
+        // Retrieve all employees to populate the employee dropdown
+        $employees = Employee::all();
+    
+        // Retrieve all products to populate the product selection
+        $products = Product::all();
+    
+        // Define interaction types for the "Form of Contact" dropdown
         $interactionTypes = [
             'phone' => 'Call',
             'email' => 'Email',
             'referral' => 'Referral',
             'social media' => 'Social Media',
         ];
-
-        return view('leads.create', compact('employees', 'products','interactionTypes'));  // Pass employees and products to the view
+    
+        // Pass the retrieved data and interaction types to the create view
+        return view('leads.create', compact('employees', 'products', 'interactionTypes'));
     }
+    
     
 
     public function store(Request $request)
@@ -268,4 +275,56 @@ class LeadController extends AppBaseController
 
         return response()->json($data);
     }
+    public function addDetails($id)
+    {
+        // Fetch the lead by ID
+        $lead = Lead::findOrFail($id);
+    
+        // Fetch other data required by the view
+        $employees = Employee::all();
+        $products = Product::all();
+        $interactionTypes = [
+            'phone' => 'Call',
+            'email' => 'Email',
+            'referral' => 'Referral',
+            'social media' => 'Social Media',
+        ];
+    
+        // Pass the lead and other data to the view
+        return view('leads.add_details', compact('lead', 'employees', 'products', 'interactionTypes'));
+    }
+    
+    
+
+public function storeDetails(Request $request, $id)
+{
+    $lead = Lead::findOrFail($id);
+
+    $validatedData = $request->validate([
+        'description' => 'required|string|max:65535',
+        'lead_date' => 'required|date',
+        'employee_id' => 'nullable|exists:employees,id',
+        'products' => 'required|array',
+        'products.*' => 'exists:products,id',
+        'quantities' => 'required|array',
+        'quantities.*' => 'integer|min:1',
+        'interactionTypes' => 'required|string|max:255',
+    ]);
+
+    // Attach products with quantities
+    foreach ($validatedData['products'] as $productId) {
+        $quantity = $validatedData['quantities'][$productId] ?? 1;
+        $lead->products()->attach($productId, ['quantity' => $quantity]);
+    }
+
+    // Update other details
+    $lead->description = $validatedData['description'];
+    $lead->lead_date = $validatedData['lead_date'];
+    $lead->employee_id = $validatedData['employee_id'];
+    $lead->interaction_type = $validatedData['interactionTypes'];
+    $lead->save();
+
+    return redirect()->route('leads.index')->with('success', 'Details added to lead successfully.');
+}
+
 }

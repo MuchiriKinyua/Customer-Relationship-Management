@@ -75,23 +75,31 @@
                         <!-- Lead Date -->
                         <td>{{ \Carbon\Carbon::parse($lead->lead_date)->format('Y-m-d') }}</td>
 
-                        <!-- Actions -->
-                        <td style="width: 120px">
-                            {!! Form::open(['route' => ['leads.destroy', $lead->id], 'method' => 'delete', 'style' => 'display:inline']) !!}
-                            <div class='btn-group'>
-                                <!-- View -->
-                                <a href="{{ route('leads.show', [$lead->id]) }}" class='btn btn-default btn-xs'>
-                                    <i class="far fa-eye"></i>
-                                </a>
+<!-- Actions -->
+<td style="width: 120px">
+    {!! Form::open(['route' => ['leads.destroy', $lead->id], 'method' => 'delete', 'style' => 'display:inline']) !!}
+    <div class='btn-group'>
+        <!-- View -->
+        <a href="{{ route('leads.show', [$lead->id]) }}" class='btn btn-default btn-xs'>
+            <i class="far fa-eye"></i>
+        </a>
 
-                                <!-- Edit -->
-                                <a href="{{ route('leads.edit', [$lead->id]) }}" class='btn btn-default btn-xs'>
-                                    <i class="far fa-edit"></i>
-                                </a>
+        <!-- Edit -->
+        <a href="{{ route('leads.edit', [$lead->id]) }}" class='btn btn-default btn-xs'>
+            <i class="far fa-edit"></i>
+        </a>
 
-                                <!-- Delete -->
-                                {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                            </div>
+        <!-- Add Details ("+" button) -->
+        <a href="{{ route('leads.addDetails', [$lead->id]) }}" class='btn btn-success btn-xs'>
+            <i class="fas fa-plus"></i>
+        </a>
+
+        <!-- Delete -->
+        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+    </div>
+    {!! Form::close() !!}
+</td>
+
                             {!! Form::close() !!}
                         </td>
                     </tr>

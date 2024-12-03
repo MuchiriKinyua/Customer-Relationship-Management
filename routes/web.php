@@ -127,6 +127,10 @@ Route::patch('daily-reports/{daily_report}/update', [DailyReportController::clas
 Route::delete('daily_reports/{id}', [DailyReportController::class, 'destroy'])->name('daily_reports.destroy');
 Route::post('/daily-reports/{daily_report}/submit', [DailyReportController::class, 'submitReport'])->name('daily_reports.submit');
 
+Route::get('/leads/{lead}/add-details', [App\Http\Controllers\LeadController::class, 'addDetails'])->name('leads.addDetails');
+Route::post('/leads/{lead}/add-details', [App\Http\Controllers\LeadController::class, 'storeDetails'])->name('leads.storeDetails');
+Route::get('/leads/{id}/add-details', [LeadController::class, 'addDetails'])->name('leads.add_details');
+
 
 
 
