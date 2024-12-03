@@ -1,14 +1,8 @@
-<!-- First Name Field -->
+<!-- Full Name Field -->
 <div class="col-sm-12">
     {!! Form::label('full_name', 'Full Name:') !!}
     <p>{{ $employee->full_name }}</p>
 </div>
-
-<!-- Last Name Field 
-<div class="col-sm-12">
-    {!! Form::label('last_name', 'Last Name:') !!}
-    <p>{{ $employee->last_name }}</p>
-</div> -->
 
 <!-- Email Field -->
 <div class="col-sm-12">

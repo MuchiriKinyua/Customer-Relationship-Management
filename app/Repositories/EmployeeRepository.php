@@ -8,8 +8,7 @@ use App\Repositories\BaseRepository;
 class EmployeeRepository extends BaseRepository
 {
     protected $fieldSearchable = [
-        'first_name',
-        'last_name',
+        'full_name',
         'email',
         'phone_number',
         'department_id'
