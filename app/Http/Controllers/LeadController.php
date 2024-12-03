@@ -48,8 +48,7 @@ class LeadController extends AppBaseController
                       ->orWhere('description', 'like', '%' . $search . '%') // Added description search
                       ->orWhereHas('employee', function ($query) use ($search) {
                           // Search employee's first name, last name, and email
-                          $query->where('first_name', 'like', '%' . $search . '%')
-                                ->orWhere('last_name', 'like', '%' . $search . '%')
+                          $query->where('full_name', 'like', '%' . $search . '%')
                                 ->orWhere('email', 'like', '%' . $search . '%');
                       })
                       ->orWhereHas('products', function ($query) use ($search) {

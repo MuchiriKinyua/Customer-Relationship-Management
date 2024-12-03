@@ -39,8 +39,7 @@
 
                         <!-- Employee -->
                         <td>
-                            {{ $lead->employee->first_name ?? 'No Employee' }}
-                            {{ $lead->employee->last_name ?? '' }}
+                            {{ $lead->employee->full_name ?? '' }}
                         </td>
 
                         <!-- Products -->
