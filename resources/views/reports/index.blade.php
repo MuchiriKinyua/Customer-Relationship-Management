@@ -6,7 +6,7 @@
             <div class="row mb-2 justify-content-center">
                 <!-- Centered Heading -->
                 <div class="col-sm-12 text-center">
-                    <h1>Reports</h1>
+                    <h1>Daily Reports</h1>
                 </div>
             </div>
             <div class="row mb-2">
