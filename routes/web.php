@@ -135,7 +135,3 @@ Route::get('/leads/{id}/add-details', [LeadController::class, 'addDetails'])->na
 Route::get('orders/lead/{leadId}', [OrderController::class, 'byLead'])->name('orders.byLead');
 Route::get('orders/client/{client_id}', [OrderController::class, 'byClient'])->name('orders.byClient');
 
-
-
-
-

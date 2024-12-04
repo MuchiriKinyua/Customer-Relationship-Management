@@ -33,6 +33,8 @@
     </a>
 </li>
 
+
+
 <li class="nav-item">
     <a href="{{ route('interactions.index') }}" class="nav-link {{ Request::is('interactions*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-tasks" style="color: green;"></i>

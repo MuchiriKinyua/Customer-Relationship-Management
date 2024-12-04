@@ -32,6 +32,7 @@ class Employee extends Model
     public function department(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\Department::class, 'department_id');
+        return $this->hasOne(Department::class, 'employee_id');
     }
 
     public function leads(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -51,4 +52,6 @@ class Employee extends Model
     {
         return $this->hasMany(DailyReport::class);
     }
+
+
 }

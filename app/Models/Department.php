@@ -11,21 +11,30 @@ class Department extends Model
 
     public $fillable = [
         'dept_name',
-        'description'
+        'description',
+        'employee_id'
     ];
 
     protected $casts = [
         'dept_name' => 'string',
-        'description' => 'string'
+        'description' => 'string',
+       'employee_id' => 'integer'
     ];
 
     public static array $rules = [
         'dept_name' => 'nullable|string|max:100',
         'description' => 'nullable|string|max:65535',
+        'employee_id' => 'nullable|exists:employees,id',
     ];
 
     public function employees(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\App\Models\Employee::class, 'department_id');
     }
+
+    public function head()
+{
+    return $this->belongsTo(Employee::class, 'employee_id');
+}
+
 }

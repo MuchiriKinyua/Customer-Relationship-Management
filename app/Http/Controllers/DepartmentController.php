@@ -6,12 +6,13 @@ use App\Http\Requests\CreateDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\DepartmentRepository;
+use App\Models\Employee; // Include Employee model
 use Illuminate\Http\Request;
 use Flash;
 
 class DepartmentController extends AppBaseController
 {
-    /** @var DepartmentRepository $departmentRepository*/
+    /** @var DepartmentRepository $departmentRepository */
     private $departmentRepository;
 
     public function __construct(DepartmentRepository $departmentRepo)
@@ -42,14 +43,14 @@ class DepartmentController extends AppBaseController
         
         return view('departments.index', compact('departments'));
     }
-    
-    
+
     /**
      * Show the form for creating a new Department.
      */
     public function create()
     {
-        return view('departments.create');
+        $employees = Employee::all()->pluck('full_name', 'id'); // Get employees for dropdown
+        return view('departments.create', compact('employees'));
     }
 
     /**
@@ -64,6 +65,8 @@ class DepartmentController extends AppBaseController
         Flash::success('Department saved successfully.');
 
         return redirect(route('departments.index'));
+        $department->update(['employee_id' => $request->employee_id]); // Add employee_id in the update logic
+
     }
 
     /**
@@ -95,7 +98,8 @@ class DepartmentController extends AppBaseController
             return redirect(route('departments.index'));
         }
 
-        return view('departments.edit')->with('department', $department);
+        $employees = Employee::all()->pluck('full_name', 'id'); // Get employees for dropdown
+        return view('departments.edit', compact('department', 'employees'));
     }
 
     /**
@@ -116,6 +120,10 @@ class DepartmentController extends AppBaseController
         Flash::success('Department updated successfully.');
 
         return redirect(route('departments.index'));
+
+        $input = $request->all();
+        $department->update(['employee_id' => $request->employee_id]); 
+
     }
 
     /**
