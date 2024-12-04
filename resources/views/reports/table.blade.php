@@ -3,7 +3,7 @@
         <table class="table" id="reports-table">
             <thead>
                 <tr>
-                    <th class="filterable employee-column">Employee Name</th>
+                    <th class="filterable department-column">Department Name</th>
                     <th class="filterable monday-column">
                         Monday<br>{{ \Carbon\Carbon::now()->startOfWeek()->format('d/m/Y') }}
                     </th>
@@ -26,9 +26,8 @@
             <tbody>
                 @foreach($reports as $report)
                     <tr>
-                        <td class="filterable employee-column">
-                            <!-- Dynamically fetch the employee name -->
-                            {{ $report->employee->full_name ?? 'N/A' }}
+                    <td class="filterable department-column">
+                            {{ $report->department->dept_name ?? 'N/A' }}
                         </td>
                         <td class="filterable monday-column">
                             {{ $report->monday ?? 'N/A' }}

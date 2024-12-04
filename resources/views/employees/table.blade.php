@@ -4,7 +4,6 @@
             <thead>
                 <tr>
                     <th>Full Name</th>
-                   <!-- <th>Last Name</th>-->
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Department</th>
@@ -16,7 +15,6 @@
                 @forelse ($employees as $employee)
                     <tr>
                         <td>{{ $employee->full_name }}</td>
-                       <!-- <td>{{ $employee->last_name }}</td>-->
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone_number }}</td>
                         <td>{{ $employee->department->dept_name ?? 'No Department' }}</td>

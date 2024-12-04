@@ -97,4 +97,50 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const form = document.querySelector('#leadForm'); // Replace with your actual form ID or class
+    if (!form) return;
+
+    // Attach an event listener for form submission
+    form.addEventListener('submit', function (e) {
+        // Prevent the default form submission for custom handling
+        e.preventDefault();
+
+        // Gather existing employee and description data to ensure they are preserved
+        const employeeId = document.querySelector('input[name="employee_id"]')?.value || '';
+        const description = document.querySelector('textarea[name="description"]')?.value || '';
+
+        // Create a new FormData object to ensure data can be submitted correctly
+        const formData = new FormData(form);
+
+        // Append employee and description to the form data
+        formData.set('employee_id', employeeId);
+        formData.set('description', description);
+
+        // Submit the form via AJAX
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Details updated successfully.');
+                    location.reload();
+                } else {
+                    alert('An error occurred while updating details.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to update details.');
+            });
+    });
+});
+
+    </script>
 @endpush

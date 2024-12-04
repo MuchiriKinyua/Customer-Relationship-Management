@@ -33,6 +33,8 @@
     </a>
 </li>
 
+
+
 <li class="nav-item">
     <a href="{{ route('interactions.index') }}" class="nav-link {{ Request::is('interactions*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-tasks" style="color: green;"></i>
@@ -64,7 +66,7 @@
 <li class="nav-item">
     <a href="{{ route('reports.index') }}" class="nav-link {{ Request::is('reports*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-chart-bar" style="color: green;"></i>
-        <p>Reports</p>
+        <p>Daily Reports</p>
     </a>
 </li>
 

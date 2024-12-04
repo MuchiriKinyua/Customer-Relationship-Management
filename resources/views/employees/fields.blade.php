@@ -1,14 +1,8 @@
-<!-- First Name Field -->
+<!-- Full Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('full_name', 'Full Name:') !!}
     {!! Form::text('full_name', null, ['class' => 'form-control', 'maxlength' => 100, 'maxlength' => 100]) !!}
 </div>
-
-<!-- Last Name Field 
-<div class="form-group col-sm-6">
-    {!! Form::label('last_name', 'Last Name:') !!}
-    {!! Form::text('last_name', null, ['class' => 'form-control', 'maxlength' => 100, 'maxlength' => 100]) !!}
-</div>-->
 
 <!-- Email Field -->
 <div class="form-group col-sm-6">

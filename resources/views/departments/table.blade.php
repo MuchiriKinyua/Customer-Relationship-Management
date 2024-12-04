@@ -5,6 +5,7 @@
             <tr>
                 <th>Dept Name</th>
                 <th>Description</th>
+                <th>Head of Department</th> <!-- Added this column -->
                 <th colspan="3">Action</th>
             </tr>
             </thead>
@@ -13,7 +14,10 @@
                 <tr>
                     <td>{{ $department->dept_name }}</td>
                     <td>{{ $department->description }}</td>
-                    <td  style="width: 120px">
+                    <td>
+                        {{ $department->head->full_name ?? 'Not Assigned' }} <!-- Display head or 'Not Assigned' -->
+                    </td>
+                    <td style="width: 120px">
                         {!! Form::open(['route' => ['departments.destroy', $department->id], 'method' => 'delete']) !!}
                         <div class='btn-group'>
                             <a href="{{ route('departments.show', [$department->id]) }}"

@@ -49,7 +49,7 @@
                     <!-- Employee Dropdown Field -->
                     <div class="form-group col-sm-6">
                         {!! Form::label('employee_id', 'Employee:') !!}
-                        {!! Form::select('employee_id', $employees->pluck('first_name', 'id'), null, ['class' => 'form-control']) !!}
+                        {!! Form::select('employee_id', $employees->pluck('full_name', 'id'), null, ['class' => 'form-control']) !!}
                     </div>
 
                     <!-- Products and Quantities Field -->

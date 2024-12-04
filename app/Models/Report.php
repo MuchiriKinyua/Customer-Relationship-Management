@@ -11,7 +11,7 @@ class Report extends Model
 
     // Fillable columns
     public $fillable = [
-        'employee_id',  // Foreign key to the employees table
+        'department_id',  // Foreign key to the employees table
         'monday',       // Report for Monday
         'tuesday',      // Report for Tuesday
         'wednesday',    // Report for Wednesday
@@ -23,7 +23,7 @@ class Report extends Model
 
     // Validation rules
     public static array $rules = [
-        'employee_id' => 'required|exists:employees,id', // Ensuring that the employee exists
+        'department_id' => 'required|exists:departments,id', // Ensuring that the employee exists
         'monday' => 'nullable|string',
         'tuesday' => 'nullable|string',
         'wednesday' => 'nullable|string',
@@ -33,9 +33,9 @@ class Report extends Model
     ];
 
     // Relationships
-    public function employee()
+    public function department()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     // Accessors (if any special formatting is required, define them here)
