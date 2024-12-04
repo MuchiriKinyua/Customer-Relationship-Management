@@ -32,18 +32,19 @@
         <!-- Filters Section -->
         <div class="container-fluid">
             <div class="row">
-                <!-- Employee Dropdown -->
+                <!-- Department Dropdown -->
                 <div class="col-sm-3">
-                    <label for="employee_id">Employee</label>
-                    <select name="employee_id" id="employee_id" class="form-control">
-                        <option value="">Select an Employee</option>
-                        @foreach($employees as $employee)
-                            <option value="{{ $employee->id }}" {{ request('employee_id') == $employee->id ? 'selected' : '' }}>
-                                {{ $employee->first_name }} {{ $employee->last_name }}
-                            </option>
-                        @endforeach
+                    <label for="department_id">Department</label>
+                    <select name="department_id" id="department_id" class="form-control">
+                        <option value="">Select a Department</option>
+                            @foreach($departments as $department)
+                                <option value="{{ $department->id }}" {{ request('department_id') == $department->id ? 'selected' : '' }}>
+                                    {{ $department->dept_name }}
+                                </option>
+                            @endforeach
                     </select>
                 </div>
+
 
                 <!-- Start Date Field -->
                 <div class="col-sm-3">

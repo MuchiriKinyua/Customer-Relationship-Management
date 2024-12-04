@@ -20,8 +20,8 @@
         <div class="card">
             <div class="card-body">
                 <dl class="row">
-                    <dt class="col-sm-3">Employee Name</dt>
-                    <dd class="col-sm-9">{{ $report->employee_name ?? 'N/A' }}</dd>
+                    <dt class="col-sm-3">Department Name</dt>
+                    <dd class="col-sm-9">{{ $report->department->dept_name ?? 'N/A' }}</dd>
 
                     <dt class="col-sm-3">Monday</dt>
                     <dd class="col-sm-9">{{ $report->monday ?? 'N/A' }}</dd>

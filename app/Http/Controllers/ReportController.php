@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Report;
 use App\Models\DailyReport;  
+use App\Models\Department; // Add Department model
 use Flash;
 
 class ReportController extends AppBaseController
@@ -26,48 +27,47 @@ class ReportController extends AppBaseController
      * Display a listing of the Report.
      */
     public function index(Request $request)
-{
-    $query = Report::query();
-    
-    // Filter reports based on search input (e.g., employee, day of the week)
-    if ($request->has('search')) {
-        $search = $request->get('search');
+    {
+        $query = Report::query();
+        
+        // Filter reports based on search input (e.g., department, day of the week)
+        if ($request->has('search')) {
+            $search = $request->get('search');
 
-        $query->where(function ($q) use ($search) {
-            $q->orWhereHas('employee', function($q) use ($search) {
-                $q->where('full_name', 'like', "%$search%");
-            })
-            ->orWhere('day_of_week', 'like', "%$search%")
-            ->orWhere('report_details', 'like', "%$search%")
-            ->orWhere('report_date', 'like', "%$search%");
+            $query->where(function ($q) use ($search) {
+                $q->orWhereHas('department', function($q) use ($search) { // Reference by department
+                    $q->where('name', 'like', "%$search%");
+                })
+                ->orWhere('day_of_week', 'like', "%$search%")
+                ->orWhere('report_details', 'like', "%$search%")
+                ->orWhere('report_date', 'like', "%$search%");
+            });
+        }
+        
+        // Filter reports based on is_submitted from the related 'daily_reports' table
+        $query->whereIn('reports.id', function($q) {
+            $q->select('daily_reports.report_id') // Ensure to select the correct column name from daily_reports
+              ->from('daily_reports')
+              ->where('is_submitted', true); // Only include reports that have been submitted
         });
+        
+        // Get the reports with the necessary relationships (department)
+        $reports = $query->with('department')->paginate(10);
+        
+        // Fetch the list of departments for the dropdown
+        $departments = Department::all();
+        
+        // Return the view with reports and departments
+        return view('reports.index', compact('reports', 'departments'));
     }
-    
-    // Filter reports based on is_submitted from the related 'daily_reports' table
-    $query->whereIn('reports.id', function($q) {
-        $q->select('daily_reports.report_id') // Ensure to select the correct column name from daily_reports
-          ->from('daily_reports')
-          ->where('is_submitted', true); // Only include reports that have been submitted
-    });
-    
-    // Get the reports with the necessary relationships (employee)
-    $reports = $query->with('employee')->paginate(10);
-    
-    // Fetch the list of employees for the dropdown
-    $employees = Employee::all();
-    
-    // Return the view with reports and employees
-    return view('reports.index', compact('reports', 'employees'));
-}
-
 
     public function create()
     {
-        // Fetch all employees for the dropdown
-        $employees = Employee::pluck('full_name', 'id');
+        // Fetch all departments for the dropdown
+        $departments = Department::pluck('name', 'id'); // Get department names and ids
 
         // Return the view for creating a new report
-        return view('reports.create', compact('employees'));
+        return view('reports.create', compact('departments'));
     }
 
     /**
@@ -83,8 +83,8 @@ class ReportController extends AppBaseController
             'report_details' => 'required|string',
         ]);
     
-        // Check if a report for the employee and day already exists
-        $existingReport = Report::where('employee_id', $input['employee_id'])
+        // Check if a report for the department and day already exists
+        $existingReport = Report::where('department_id', $input['department_id'])
                                 ->where('day_of_week', $input['day_of_week'])
                                 ->where('report_date', now()->format('Y-m-d'))
                                 ->first();
@@ -132,10 +132,10 @@ class ReportController extends AppBaseController
             return redirect(route('reports.index'));
         }
 
-        // Fetch all employees for the dropdown (if needed)
-        $employees = Employee::pluck('full_name', 'id');
+        // Fetch all departments for the dropdown
+        $departments = Department::pluck('name', 'id');
 
-        return view('reports.edit', compact('report', 'employees'));
+        return view('reports.edit', compact('report', 'departments'));
     }
 
     /**
@@ -187,32 +187,32 @@ class ReportController extends AppBaseController
     }
 
     /**
-     * Synchronize Employee Reports Data (e.g., for the week).
+     * Synchronize Department Reports Data (e.g., for the week).
      */
     public function syncData()
     {
-        // Fetch active employees
-        $employees = Employee::where('status', 'active')->get();
+        // Fetch active departments
+        $departments = Department::all();
 
-        // Loop through each employee and generate or update reports
-        foreach ($employees as $employee) {
+        // Loop through each department and generate or update reports
+        foreach ($departments as $department) {
             // Check if a report for the current week exists
-            $existingReport = Report::where('employee_id', $employee->id)
-                ->where('day_of_week', 'like', "%$employee->working_day%")
+            $existingReport = Report::where('department_id', $department->id)
+                ->where('day_of_week', 'like', "%$department->working_day%")
                 ->first();
 
-            // If no report exists for this employee and day of the week, create a new one
+            // If no report exists for this department and day of the week, create a new one
             if (!$existingReport) {
                 Report::create([
-                    'employee_id' => $employee->id,
-                    'day_of_week' => $employee->working_day, // Assume 'working_day' holds the correct day
-                    'report_details' => 'Generated report for ' . $employee->full_name, // Example content
+                    'department_id' => $department->id,
+                    'day_of_week' => $department->working_day, // Assume 'working_day' holds the correct day
+                    'report_details' => 'Generated report for department ' . $department->name, // Example content
                     'report_date' => now(), // Set to current date
                 ]);
             }
         }
 
-        Flash::success('Employee report data has been synchronized successfully.');
+        Flash::success('Department report data has been synchronized successfully.');
 
         return redirect(route('reports.index'));
     }
