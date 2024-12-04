@@ -9,22 +9,19 @@ class Employee extends Model
     public $table = 'employees';
 
     public $fillable = [
-        'first_name',
-        'last_name',
+        'full_name',
         'email',
         'phone_number',
         'department_id'
     ];
 
     protected $casts = [
-        'first_name' => 'string',
-        'last_name' => 'string',
+        'full_name' => 'string',
         'email' => 'string'
     ];
 
     public static array $rules = [
-        'first_name' => 'nullable|string|max:100',
-        'last_name' => 'nullable|string|max:100',
+        'full_name' => 'nullable|string|max:100',
         'email' => 'nullable|string|max:30',
         'phone_number' => 'nullable',
         'created_at' => 'nullable',
@@ -46,12 +43,13 @@ class Employee extends Model
 {
     return $this->hasMany(\App\Models\Client::class, 'employee_id');
 }
-    public function getFullNameAttribute(): string
+  /*  public function getFullNameAttribute(): string
     {
-        return "{$this->first_name} {$this->last_name}";
+        return "{$this->first_name} {$this->last_name}"; 
     }
+        */
     public function dailyReports()
     {
         return $this->hasMany(DailyReport::class);
-    }
+    } 
 }

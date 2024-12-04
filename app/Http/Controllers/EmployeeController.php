@@ -35,8 +35,7 @@ class EmployeeController extends AppBaseController
         // If there is a search term, apply a filter
         if ($search) {
             $employees = $employees->where(function ($query) use ($search) {
-                $query->where('first_name', 'like', '%' . $search . '%')
-                      ->orWhere('last_name', 'like', '%' . $search . '%')
+                $query->where('full_name', 'like', '%' . $search . '%')
                       ->orWhere('email', 'like', '%' . $search . '%')
                       ->orWhere('phone_number', 'like', '%' . $search . '%')
                       ->orWhereHas('department', function ($query) use ($search) {
@@ -150,7 +149,7 @@ class EmployeeController extends AppBaseController
     }
     public function getEmployees()
     {
-        $employees = Employee::select('id', 'first_name', 'last_name')->get();
+        $employees = Employee::select('id', 'full_name')->get();
         return response()->json($employees);
     }
 
