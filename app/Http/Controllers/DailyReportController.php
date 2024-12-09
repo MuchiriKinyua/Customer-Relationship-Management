@@ -78,28 +78,24 @@ public function submit(DailyReport $dailyReport)
         return redirect()->route('daily_reports.index')->with('error', 'This report has already been submitted.');
     }
 
-    // Mark the report as submitted in the daily_reports table
+    // Mark the daily report as submitted
     $dailyReport->update(['is_submitted' => true]);
 
-    // Check if the report exists in the reports table, if not, create it
-    $report = Report::where('employee_id', $dailyReport->employee_id)
-                    ->where('report_date', $dailyReport->report_date)
-                    ->first();
+    // Determine the column to update in the reports table
+    $dayColumn = strtolower($dailyReport->day); 
 
-    if ($report) {
-       
-        
-        $report->save();
-    } else {
-        // If no report exists in the reports table, create one
-        Report::create([
-            'employee_id' => $dailyReport->employee_id,
-            'report_date' => $dailyReport->report_date,
-            
-        ]);
-    }
+    // Find or create the corresponding row in the reports table
+    $report = Report::firstOrNew([
+        'employee_id' => $dailyReport->employee_id,
+        'report_date' => $dailyReport->report_date,
+    ]);
 
-    // Return success message
+    // Update the appropriate column with the daily report content
+    $report->$dayColumn = $dailyReport->report;
+
+    // Save the updated report
+    $report->save();
+
     return redirect()->route('daily_reports.index')->with('success', 'Report successfully submitted.');
 }
 
