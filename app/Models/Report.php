@@ -19,6 +19,7 @@ class Report extends Model
         'friday',       // Report for Friday
         'summary',      // Weekly summary
         'report_date', // Date of the report
+        'employee_id',
     ];
 
     // Validation rules
