@@ -40,14 +40,6 @@
         <small class="text-danger">{{ $errors->first('report') }}</small>
     @endif
 </div>
-<form action="{{ route('daily_reports.store') }}" method="POST">
-    @csrf
-    <input type="hidden" name="employee_id" value="{{ $employee->id }}">
-
-    <!-- Add other form fields (e.g., report content, etc.) -->
-
-    <button type="submit" class="btn btn-primary">Submit Report</button>
-</form>
 
 
 
