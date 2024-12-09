@@ -95,17 +95,12 @@ public function submit(DailyReport $dailyReport)
         Report::create([
             'employee_id' => $dailyReport->employee_id,
             'report_date' => $dailyReport->report_date,
-            
         ]);
     }
 
     // Return success message
     return redirect()->route('daily_reports.index')->with('success', 'Report successfully submitted.');
 }
-
-
-
-
 
     public function index(Request $request)
     {

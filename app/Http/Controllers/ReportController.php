@@ -33,9 +33,9 @@ class ReportController extends AppBaseController
         // Filter reports based on search input (e.g., department, day of the week)
         if ($request->has('search')) {
             $search = $request->get('search');
-
+    
             $query->where(function ($q) use ($search) {
-                $q->orWhereHas('department', function($q) use ($search) { // Reference by department
+                $q->orWhereHas('department', function($q) use ($search) {
                     $q->where('name', 'like', "%$search%");
                 })
                 ->orWhere('day_of_week', 'like', "%$search%")
@@ -54,12 +54,14 @@ class ReportController extends AppBaseController
         // Get the reports with the necessary relationships (department)
         $reports = $query->with('department')->paginate(10);
         
-        // Fetch the list of departments for the dropdown
-        $departments = Department::all();
+        // Fetch the list of employees and departments for the dropdown
+        $employees = Employee::all(); // Fetch employees from the database
+        $departments = Department::all(); // Fetch departments from the database
         
-        // Return the view with reports and departments
-        return view('reports.index', compact('reports', 'departments'));
+        // Return the view with reports, departments, and employees
+        return view('reports.index', compact('reports', 'departments', 'employees'));
     }
+    
 
     public function create()
     {
