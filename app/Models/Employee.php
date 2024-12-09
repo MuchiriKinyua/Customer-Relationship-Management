@@ -53,5 +53,4 @@ class Employee extends Model
         return $this->hasMany(DailyReport::class);
     }
 
-
 }

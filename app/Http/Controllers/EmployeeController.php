@@ -7,8 +7,11 @@ use App\Http\Requests\UpdateEmployeeRequest;
 use App\Http\Controllers\AppBaseController;
 use App\Repositories\EmployeeRepository;
 use App\Models\Department;
-use Illuminate\Http\Request;
 use App\Models\Employee;
+use Illuminate\Http\Request;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Flash;
 
 class EmployeeController extends AppBaseController
@@ -152,5 +155,5 @@ class EmployeeController extends AppBaseController
         $employees = Employee::select('id', 'full_name')->get();
         return response()->json($employees);
     }
-
+    
 }

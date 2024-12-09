@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\OrderController;
@@ -134,4 +135,7 @@ Route::get('/leads/{id}/add-details', [LeadController::class, 'addDetails'])->na
 
 Route::get('orders/lead/{leadId}', [OrderController::class, 'byLead'])->name('orders.byLead');
 Route::get('orders/client/{client_id}', [OrderController::class, 'byClient'])->name('orders.byClient');
+
+Route::get('/reports/{report}', [ReportController::class, 'show'])->middleware('restrict');
+
 
