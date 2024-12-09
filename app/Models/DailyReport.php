@@ -23,6 +23,7 @@ class DailyReport extends Model
         'report',       
         'report_date',  
         'report_id',
+        'is_submitted',
     ];
 
     protected $casts = [

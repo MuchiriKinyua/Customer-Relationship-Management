@@ -33,6 +33,14 @@
     </a>
 </li>
 
+<li class="nav-item">
+    <a href="{{ route('daily_reports.index') }}" class="nav-link">
+        <i class="nav-icon fas fa-file-alt"></i>
+        <p>Employee Reports</p>
+    </a>
+</li>
+
+
 
 
 <li class="nav-item">
