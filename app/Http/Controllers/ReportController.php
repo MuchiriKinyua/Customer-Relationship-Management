@@ -30,12 +30,12 @@ class ReportController extends AppBaseController
     {
         $query = Report::query();
         
-        // Filter reports based on search input (e.g., department, day of the week)
+        // Filter reports based on search input
         if ($request->has('search')) {
             $search = $request->get('search');
-    
+            
             $query->where(function ($q) use ($search) {
-                $q->orWhereHas('department', function($q) use ($search) {
+                $q->orWhereHas('department', function ($q) use ($search) {
                     $q->where('name', 'like', "%$search%");
                 })
                 ->orWhere('day_of_week', 'like', "%$search%")
@@ -45,18 +45,18 @@ class ReportController extends AppBaseController
         }
         
         // Filter reports based on is_submitted from the related 'daily_reports' table
-        $query->whereIn('reports.id', function($q) {
-            $q->select('daily_reports.report_id') // Ensure to select the correct column name from daily_reports
+        $query->whereIn('reports.id', function ($q) {
+            $q->select('report_id') // Ensure to select the correct column name from daily_reports
               ->from('daily_reports')
               ->where('is_submitted', true); // Only include reports that have been submitted
         });
         
-        // Get the reports with the necessary relationships (department)
-        $reports = $query->with('department')->paginate(10);
+        // Fetch reports with relationships (department and employee)
+        $reports = $query->with(['department', 'employee'])->paginate(10);
         
-        // Fetch the list of employees and departments for the dropdown
-        $employees = Employee::all(); // Fetch employees from the database
-        $departments = Department::all(); // Fetch departments from the database
+        // Fetch employees and departments for filtering dropdowns
+        $employees = Employee::all();
+        $departments = Department::all();
         
         // Return the view with reports, departments, and employees
         return view('reports.index', compact('reports', 'departments', 'employees'));
