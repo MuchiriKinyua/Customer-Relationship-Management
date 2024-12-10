@@ -150,3 +150,5 @@ Route::post('/daily_reports/{daily_report}/submit', [DailyReportController::clas
 
 Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+Route::resource('user', App\Http\Controllers\UserController::class);
+

@@ -87,15 +87,23 @@
 
 <li class="nav-item">
     <a href="{{ route('roles.index') }}" class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-users-cog"></i> <!-- Changed icon for Roles -->
+        <i class="nav-icon fas fa-users-cog" style="color: green;"></i>
         <p>Roles</p>
     </a>
 </li>
 
 <li class="nav-item">
     <a href="{{ route('permissions.index') }}" class="nav-link {{ Request::is('permissions*') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-key"></i> <!-- Changed icon for Permissions -->
+        <i class="nav-icon fas fa-key" style="color: green;"></i>
         <p>Permissions</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="{{ route('user.index') }}" class="nav-link {{ Request::is('user*') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-users" style="color: green;"></i>
+        <p>Users</p>
+    </a>
+</li>
+
 
