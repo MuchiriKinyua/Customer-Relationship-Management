@@ -44,4 +44,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function hasRole($hodRole)
+    {
+        // Check if the user has the given role
+        return $this->roles->contains('name', $hodRole);
+    }
+    public static function find($id)
+    {
+        // Use Eloquent's query builder to find the record by primary key
+        return self::where('id', $id)->first();
+    }
 }

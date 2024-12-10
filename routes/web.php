@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
@@ -100,12 +101,12 @@ Route::get('/api/{type}/{id}/products', function ($type, $id) {
     return response()->json([], 404);
 });
 
-Route::get('/daily-reports/create', [DailyReportController::class, 'create'])->name('daily_reports.create');
-Route::post('/daily-reports', [DailyReportController::class, 'store'])->name('daily_reports.store');
-Route::get('/daily-reports/create/{employeeId}/{dayIndex?}', [DailyReportController::class, 'create'])->name('daily_reports.create');
+Route::get('/daily_reports/create', [DailyReportController::class, 'create'])->name('daily_reports.create');
+Route::post('/daily_reports', [DailyReportController::class, 'store'])->name('daily_reports.store');
+
 
 // View the report for a specific day
-Route::get('/daily-reports/view/{employeeId}/{dayIndex}', [DailyReportController::class, 'viewReport'])->name('daily_reports.view');
+Route::get('/daily_reports/view/{employeeId}/{dayIndex}', [DailyReportController::class, 'viewReport'])->name('daily_reports.view');
 
 Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
 Route::post('/transactions/store', function (Request $request) {
@@ -123,10 +124,10 @@ Route::post('/clients/store', function (Request $request) {
 });
 
 Route::get('daily_reports/create/{employeeId}', [DailyReportController::class, 'create'])->name('daily_reports.create');
-Route::get('daily-reports/{daily_report}/edit', [DailyReportController::class, 'edit'])->name('daily_reports.edit');
-Route::patch('daily-reports/{daily_report}/update', [DailyReportController::class, 'update'])->name('daily_reports.update');
+Route::get('daily_reports/{daily_report}/edit', [DailyReportController::class, 'edit'])->name('daily_reports.edit');
+Route::patch('daily_reports/{daily_report}/update', [DailyReportController::class, 'update'])->name('daily_reports.update');
 Route::delete('daily_reports/{id}', [DailyReportController::class, 'destroy'])->name('daily_reports.destroy');
-Route::post('/daily-reports/{daily_report}/submit', [DailyReportController::class, 'submitReport'])->name('daily_reports.submit');
+Route::post('/daily_reports/{daily_report}/submit', [DailyReportController::class, 'submitReport'])->name('daily_reports.submit');
 
 Route::get('/leads/{lead}/add-details', [App\Http\Controllers\LeadController::class, 'addDetails'])->name('leads.addDetails');
 Route::post('/leads/{lead}/add-details', [App\Http\Controllers\LeadController::class, 'storeDetails'])->name('leads.storeDetails');
@@ -136,6 +137,19 @@ Route::get('/leads/{id}/add-details', [LeadController::class, 'addDetails'])->na
 Route::get('orders/lead/{leadId}', [OrderController::class, 'byLead'])->name('orders.byLead');
 Route::get('orders/client/{client_id}', [OrderController::class, 'byClient'])->name('orders.byClient');
 
-Route::get('/reports/{report}', [ReportController::class, 'show'])->middleware('restrict');
+Route::resource('daily_reports', DailyReportController::class);
+
+
+Route::get('daily_reports/create/{employeeId?}', [DailyReportController::class, 'create'])->name('daily_reports.create');
+
+// Route to display the submit page
+Route::get('/daily_reports/{reportId}/submit', [DailyReportController::class, 'showSubmitPage'])->name('daily_reports.submitPage');
+
+// Route to submit the report
+Route::post('/daily_reports/{daily_report}/submit', [DailyReportController::class, 'submit'])->name('daily_reports.submit');
+
+Route::middleware(['auth', 'restrict'])->group(function () {
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+});
 
 

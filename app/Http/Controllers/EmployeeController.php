@@ -10,9 +10,9 @@ use App\Models\Department;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Laracasts\Flash\Flash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-use Flash;
 
 class EmployeeController extends AppBaseController
 {
@@ -31,10 +31,10 @@ class EmployeeController extends AppBaseController
     {
         // Get search term from the request
         $search = $request->input('search');
-        
+
         // Query employees using the repository
         $employees = $this->employeeRepository->query()->with('department');
-        
+
         // If there is a search term, apply a filter
         if ($search) {
             $employees = $employees->where(function ($query) use ($search) {
@@ -46,13 +46,13 @@ class EmployeeController extends AppBaseController
                       });
             });
         }
-        
+
         // Paginate results (10 per page, adjust as needed)
         $employees = $employees->paginate(10);
-        
+
         return view('employees.index', compact('employees'));
     }
-    
+
 
     /**
      * Show the form for creating a new Employee.
@@ -155,5 +155,5 @@ class EmployeeController extends AppBaseController
         $employees = Employee::select('id', 'full_name')->get();
         return response()->json($employees);
     }
-    
+
 }

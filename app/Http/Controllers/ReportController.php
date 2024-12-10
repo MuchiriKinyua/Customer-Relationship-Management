@@ -117,9 +117,6 @@ class ReportController extends AppBaseController
 
             return redirect(route('reports.index'));
         }
-        if (!auth()->user()->can('view reports')) {
-            abort(403, 'Unauthorized action.');
-        }
 
         return view('reports.show')->with('report', $report);
     }
