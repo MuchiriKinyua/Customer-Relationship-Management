@@ -147,3 +147,6 @@ Route::get('/daily_reports/{reportId}/submit', [DailyReportController::class, 's
 
 // Route to submit the report
 Route::post('/daily_reports/{daily_report}/submit', [DailyReportController::class, 'submit'])->name('daily_reports.submit');
+
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+Route::resource('permissions', App\Http\Controllers\PermissionController::class);
