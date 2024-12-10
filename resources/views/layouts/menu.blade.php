@@ -35,7 +35,7 @@
 
 <li class="nav-item">
     <a href="{{ route('daily_reports.index') }}" class="nav-link">
-        <i class="nav-icon fas fa-file-alt"></i>
+        <i class="nav-icon fas fa-file-alt" style="color: green;"></i>
         <p>Employee Reports</p>
     </a>
 </li>
