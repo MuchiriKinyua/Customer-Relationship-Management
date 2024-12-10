@@ -8,6 +8,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DailyReportController;
 use App\Http\Controllers\InteractionController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RoleController;
 use App\Models\Product;
 use App\Models\Client;
 use App\Models\Lead;
@@ -152,3 +154,10 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 Route::resource('permissions', App\Http\Controllers\PermissionController::class);
 Route::resource('user', App\Http\Controllers\UserController::class);
 
+Route::resource('permissions', PermissionController::class);
+Route::get('permissions/{permissionId}/delete', [PermissionController::class, 'destroy']);
+
+Route::resource('roles', RoleController::class);
+Route::get('roles/{roleId}/delete', [RoleController::class, 'destroy']);
+Route::get('roles/{roleId}/give-permissions', [RoleController::class, 'addPermissionToRole']);
+Route::put('roles/{roleId}/give-permissions', [RoleController::class, 'givePermissionToRole']);
