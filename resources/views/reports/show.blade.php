@@ -9,7 +9,6 @@
                 </div>
                 <div class="col-sm-6 text-right">
 
-                    @role('admin')
                      @can('view reports')
                     <a class="btn btn-primary" href="{{ route('reports.index') }}">
                         Back to Reports
@@ -17,7 +16,6 @@
                     @else
                     <p>You are not authorized to view reports</p>
                     @endcan
-                    @endrole
                 </div>
             </div>
         </div>

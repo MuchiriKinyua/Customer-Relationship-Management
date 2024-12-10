@@ -4,6 +4,12 @@
     {!! Form::select('department_id', $departments, null, ['class' => 'form-control', 'placeholder' => 'Select Department']) !!}
 </div>
 
+<!-- Employee Name Field -->
+<div class="col-sm-12">
+    {!! Form::label('employee_name', 'Employee Name:') !!}
+    <p>{{ $report->employee_name ?? 'N/A' }}</p>
+</div>
+
 <!-- Monday Field -->
 <div class="col-sm-12">
     {!! Form::label('monday', 'Monday:') !!}

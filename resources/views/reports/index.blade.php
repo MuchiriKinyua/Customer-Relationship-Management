@@ -45,6 +45,18 @@
                     </select>
                 </div>
 
+                <!-- Employee Dropdown -->
+                <div class="col-sm-3">
+                    <label for="employee_id">Employee</label>
+                    <select name="employee_id" id="employee_id" class="form-control">
+                        <option value="">Select an Employee</option>
+                        @foreach($employees as $employee)
+                            <option value="{{ $employee->id }}" {{ request('employee_id') == $employee->id ? 'selected' : '' }}>
+                                {{ $employee->full_name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
 
                 <!-- Start Date Field -->
                 <div class="col-sm-3">

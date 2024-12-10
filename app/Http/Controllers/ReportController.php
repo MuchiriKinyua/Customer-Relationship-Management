@@ -9,11 +9,9 @@ use App\Repositories\ReportRepository;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Report;
-use App\Models\DailyReport;
+use App\Models\DailyReport;  
 use App\Models\Department; // Add Department model
 use Flash;
-use Spatie\Permission\Models\Permission;
-
 
 class ReportController extends AppBaseController
 {
@@ -31,13 +29,13 @@ class ReportController extends AppBaseController
     public function index(Request $request)
     {
         $query = Report::query();
-
+        
         // Filter reports based on search input (e.g., department, day of the week)
         if ($request->has('search')) {
             $search = $request->get('search');
-
+    
             $query->where(function ($q) use ($search) {
-                $q->orWhereHas('department', function($q) use ($search) { // Reference by department
+                $q->orWhereHas('department', function($q) use ($search) {
                     $q->where('name', 'like', "%$search%");
                 })
                 ->orWhere('day_of_week', 'like', "%$search%")
@@ -45,23 +43,25 @@ class ReportController extends AppBaseController
                 ->orWhere('report_date', 'like', "%$search%");
             });
         }
-
+        
         // Filter reports based on is_submitted from the related 'daily_reports' table
         $query->whereIn('reports.id', function($q) {
             $q->select('daily_reports.report_id') // Ensure to select the correct column name from daily_reports
               ->from('daily_reports')
               ->where('is_submitted', true); // Only include reports that have been submitted
         });
-
+        
         // Get the reports with the necessary relationships (department)
         $reports = $query->with('department')->paginate(10);
-
-        // Fetch the list of departments for the dropdown
-        $departments = Department::all();
-
-        // Return the view with reports and departments
-        return view('reports.index', compact('reports', 'departments'));
+        
+        // Fetch the list of employees and departments for the dropdown
+        $employees = Employee::all(); // Fetch employees from the database
+        $departments = Department::all(); // Fetch departments from the database
+        
+        // Return the view with reports, departments, and employees
+        return view('reports.index', compact('reports', 'departments', 'employees'));
     }
+    
 
     public function create()
     {
@@ -78,19 +78,19 @@ class ReportController extends AppBaseController
     public function store(CreateReportRequest $request)
     {
         $input = $request->all();
-
+    
         // Validate the day_of_week and report details
         $request->validate([
             'day_of_week' => 'required|string',
             'report_details' => 'required|string',
         ]);
-
+    
         // Check if a report for the department and day already exists
         $existingReport = Report::where('department_id', $input['department_id'])
                                 ->where('day_of_week', $input['day_of_week'])
                                 ->where('report_date', now()->format('Y-m-d'))
                                 ->first();
-
+    
         if ($existingReport) {
             // Append the new report details
             $existingReport->report_details .= "\n\n" . $input['report_details'];
@@ -99,12 +99,12 @@ class ReportController extends AppBaseController
             // Create the report
             Report::create($input);
         }
-
+    
         Flash::success('Report saved successfully.');
-
+    
         return redirect(route('reports.index'));
     }
-
+    
     /**
      * Display the specified Report.
      */
