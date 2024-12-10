@@ -7,7 +7,7 @@
                     <th>Email</th>
                     <th>Phone Number</th>
                     <th>Department</th>
-                    <th>Report</th>
+                   
                     <th>Action</th>
                 </tr>
             </thead>
@@ -18,6 +18,7 @@
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->phone_number }}</td>
                         <td>{{ $employee->department->dept_name ?? 'No Department' }}</td>
+                        
 
                         <td>
                             <!-- Action Buttons -->

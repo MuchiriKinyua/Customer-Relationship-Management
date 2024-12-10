@@ -53,4 +53,10 @@ class Employee extends Model
         return $this->hasMany(DailyReport::class);
     }
 
+    public function reports()
+{
+    return $this->hasMany(Report::class);
+}
+
+
 }

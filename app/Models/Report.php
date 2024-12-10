@@ -29,6 +29,7 @@ class Report extends Model
         'tuesday' => 'nullable|string',
         'wednesday' => 'nullable|string',
         'thursday' => 'nullable|string',
+        
         'friday' => 'nullable|string',
         'summary' => 'nullable|string',
     ];
@@ -38,6 +39,11 @@ class Report extends Model
     {
         return $this->belongsTo(Department::class, 'department_id');
     }
+
+    public function employee()
+{
+    return $this->belongsTo(Employee::class);
+}
 
     // Accessors (if any special formatting is required, define them here)
     public function getMondayAttribute($value)

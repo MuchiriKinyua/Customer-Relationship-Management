@@ -1,8 +1,6 @@
 <?php
 
-
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\OrderController;
@@ -139,8 +137,10 @@ Route::get('orders/client/{client_id}', [OrderController::class, 'byClient'])->n
 
 Route::resource('daily_reports', DailyReportController::class);
 
-
+Route::get('/daily_reports/{employeeId}/{reportId}', [DailyReportController::class, 'viewReport'])->name('daily_reports.view');
 Route::get('daily_reports/create/{employeeId?}', [DailyReportController::class, 'create'])->name('daily_reports.create');
+Route::get('daily_reports/{employeeId}/view/{reportId}', [DailyReportController::class, 'viewReport'])
+    ->name('daily_reports.view');
 
 // Route to display the submit page
 Route::get('/daily_reports/{reportId}/submit', [DailyReportController::class, 'showSubmitPage'])->name('daily_reports.submitPage');
@@ -148,8 +148,7 @@ Route::get('/daily_reports/{reportId}/submit', [DailyReportController::class, 's
 // Route to submit the report
 Route::post('/daily_reports/{daily_report}/submit', [DailyReportController::class, 'submit'])->name('daily_reports.submit');
 
-Route::middleware(['auth', 'restrict'])->group(function () {
-    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
-});
-
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+Route::resource('permissions', App\Http\Controllers\PermissionController::class);
+Route::resource('user', App\Http\Controllers\UserController::class);
 

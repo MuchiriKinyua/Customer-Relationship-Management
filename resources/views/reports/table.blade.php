@@ -27,13 +27,14 @@
             <tbody>
                 @foreach($reports as $report)
                     <tr>
-                    <td class="filterable employee-column">
-                            <!-- Dynamically fetch the employee name -->
-                            {{ $report->employee->full_name ?? 'N/A' }}
-                    </td>
                         <td class="filterable department-column">
-                            {{ $report->department->dept_name ?? 'N/A' }}
+                            {{ $report->employee->department->dept_name ?? 'N/A' }}
                         </td>
+                        
+                        <td class="filterable employee-column">
+                            {{ $report->employee->full_name ?? 'N/A' }}
+                        </td>
+                        
                         <td class="filterable monday-column">
                             {{ $report->monday ?? 'N/A' }}
                         </td>
