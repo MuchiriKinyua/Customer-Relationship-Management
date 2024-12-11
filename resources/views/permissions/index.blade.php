@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-12">
             @if (session('status'))
-                <div class="alert alert-success">{{session('status')}}</div>
+                <div class="alert alert-success">{{ session('status') }}</div>
             @endif
             <div class="card shadow-sm border-0 mt-3">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($permissions as $permission)
+                            @forelse ($permissions as $permission)
                             <tr>
                                 <td>{{ $permission->id }}</td>
                                 <td>{{ $permission->name }}</td>
@@ -33,9 +33,18 @@
                                     <a href="{{ url('permissions/'.$permission->id.'/delete') }}" class="btn btn-danger mx-2">Delete</a>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="3" class="text-center">No permissions found.</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center">
+                        {{ $permissions->links() }}
+                    </div>
                 </div>
             </div>
         </div>

@@ -21,7 +21,7 @@ class RoleController extends Controller
         ]);    
     }
     public function create(){
-        return view('role-permission.role.create');
+        return view('roles.create');
     }
     public function store(Request $request){
         $request->validate([
@@ -37,7 +37,7 @@ class RoleController extends Controller
             return redirect('roles')->with('status','Role Created Successfully');
     }
     public function edit(Role $role){
-        return view('role-permission.role.edit',[
+        return view('roles.edit',[
             'role' => $role
         ]);
     }
