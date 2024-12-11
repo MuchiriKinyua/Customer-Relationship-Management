@@ -57,6 +57,7 @@
     </a>
 </li>
 
+@if(auth()->user()->hasRole('super admin') || auth()->user()->hasRole('financial accountant'))
 <li class="nav-item">
     <a href="{{ route('orders.index') }}" class="nav-link {{ Request::is('orders*') ? 'active' : '' }}">
         <i class="nav-icon fas fa-shopping-basket" style="color: green;"></i>
@@ -70,6 +71,7 @@
         <p>Transactions</p>
     </a>
 </li>
+@endif
 
 @if(auth()->user()->hasRole('super admin') || auth()->user()->hasRole('head of department'))
     <li class="nav-item">
