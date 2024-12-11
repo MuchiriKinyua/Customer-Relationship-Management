@@ -71,12 +71,14 @@
     </a>
 </li>
 
-<li class="nav-item">
-    <a href="{{ route('reports.index') }}" class="nav-link {{ Request::is('reports*') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-chart-bar" style="color: green;"></i>
-        <p>Daily Reports</p>
-    </a>
-</li>
+@if(auth()->user()->hasRole('super admin') || auth()->user()->hasRole('head of department'))
+    <li class="nav-item">
+        <a href="{{ route('reports.index') }}" class="nav-link {{ Request::is('reports*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-chart-bar" style="color: green;"></i>
+            <p>Daily Reports</p>
+        </a>
+    </li>
+@endif
 
 <li class="nav-item">
     <a href="{{ route('enquiries.index') }}" class="nav-link {{ Request::is('enquiries*') ? 'active' : '' }}">
@@ -85,7 +87,7 @@
     </a>
 </li>
 
-@if(auth()->user()->hasRole('super-admin'))
+@if(auth()->user()->hasRole('super admin'))
     <li class="nav-item has-treeview {{ Request::is('roles*') || Request::is('permissions*') || Request::is('user*') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ Request::is('roles*') || Request::is('permissions*') || Request::is('user*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-users-cog" style="color: green;"></i>

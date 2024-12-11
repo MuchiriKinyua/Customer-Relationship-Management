@@ -11,9 +11,9 @@
             <div class="card shadow-sm border-0 mt-3">
                 <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                     <h4 class="mb-0">Users</h4>
-                    <a href="{{ url('users/create') }}" class="btn btn-success btn-sm">
+                    <!-- <a href="{{ url('users/create') }}" class="btn btn-success btn-sm">
                         <i class="fas fa-plus me-2"></i>Add User
-                    </a>
+                    </a> -->
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped">

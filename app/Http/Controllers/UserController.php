@@ -50,7 +50,7 @@ class UserController extends Controller
 
         $user->syncRoles($request->roles);
 
-        return redirect('/users')->with('status', 'User created successfully with roles');
+        return redirect('/users.index')->with('status', 'User created successfully with roles');
 
     }
     public function edit(User $user){
