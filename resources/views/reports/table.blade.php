@@ -1,17 +1,5 @@
 <div class="card-body p-0">
-    <div class="mb-3">
-        <!-- Day Selection Dropdown -->
-        <form method="GET" action="{{ route('reports.index') }}">
-            <label for="day-select">Select Day:</label>
-            <select id="day-select" name="day" onchange="this.form.submit()" class="form-control" style="width: auto; display: inline-block;">
-                @foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] as $day)
-                    <option value="{{ $day }}" {{ $selectedDay === $day ? 'selected' : '' }}>
-                        {{ ucfirst($day) }}
-                    </option>
-                @endforeach
-            </select>
-        </form>
-    </div>
+
 
     <div class="table-responsive">
         <table class="table" id="reports-table">
