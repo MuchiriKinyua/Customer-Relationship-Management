@@ -29,38 +29,65 @@ class ReportController extends AppBaseController
     public function index(Request $request)
     {
         $query = Report::query();
+    
+        // Default to 'monday' if no day is selected
+        $selectedDay = $request->get('day', 'monday');
         
+        // Ensure the selected day is a valid column
+        $validDays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+        if (!in_array($selectedDay, $validDays)) {
+            $selectedDay = 'monday'; // Fallback to default
+        }
+    
         // Filter reports based on search input
         if ($request->has('search')) {
             $search = $request->get('search');
-            
             $query->where(function ($q) use ($search) {
                 $q->orWhereHas('department', function ($q) use ($search) {
-                    $q->where('name', 'like', "%$search%");
+                    $q->where('dept_name', 'like', "%$search%");
                 })
-                ->orWhere('day_of_week', 'like', "%$search%")
                 ->orWhere('report_details', 'like', "%$search%")
                 ->orWhere('report_date', 'like', "%$search%");
             });
         }
-        
+    
+        // Filter reports by department
+        if ($request->has('department_id') && $request->get('department_id')) {
+            $query->where('department_id', $request->get('department_id'));
+        }
+    
+        // Filter reports by employee
+        if ($request->has('employee_id') && $request->get('employee_id')) {
+            $query->where('employee_id', $request->get('employee_id'));
+        }
+    
+        // Filter reports by start and end date
+        if ($request->has('start_date') && $request->has('end_date')) {
+            $query->whereBetween('report_date', [$request->get('start_date'), $request->get('end_date')]);
+        }
+    
+        // Add a filter to select the specific day column
+        $query->whereNotNull($selectedDay);
+    
         // Filter reports based on is_submitted from the related 'daily_reports' table
         $query->whereIn('reports.id', function ($q) {
-            $q->select('report_id') // Ensure to select the correct column name from daily_reports
+            $q->select('report_id')
               ->from('daily_reports')
-              ->where('is_submitted', true); // Only include reports that have been submitted
+              ->where('is_submitted', true);
         });
-        
+    
         // Fetch reports with relationships (department and employee)
         $reports = $query->with(['department', 'employee'])->paginate(10);
-        
+    
         // Fetch employees and departments for filtering dropdowns
         $employees = Employee::all();
         $departments = Department::all();
-        
-        // Return the view with reports, departments, and employees
-        return view('reports.index', compact('reports', 'departments', 'employees'));
+    
+        // Return the view with reports, departments, employees, and the selected day
+        return view('reports.index', compact('reports', 'departments', 'employees', 'selectedDay', 'validDays'));
     }
+    
+    
     
 
     public function create()

@@ -1,31 +1,34 @@
 <div class="card-body p-0">
+    <div class="mb-3">
+        <!-- Day Selection Dropdown -->
+        <form method="GET" action="{{ route('reports.index') }}">
+            <label for="day-select">Select Day:</label>
+            <select id="day-select" name="day" onchange="this.form.submit()" class="form-control" style="width: auto; display: inline-block;">
+                @foreach (['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] as $day)
+                    <option value="{{ $day }}" {{ $selectedDay === $day ? 'selected' : '' }}>
+                        {{ ucfirst($day) }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
+    </div>
+
     <div class="table-responsive">
         <table class="table" id="reports-table">
             <thead>
                 <tr>
                     <th class="filterable department-column">Department Name</th>
                     <th class="filterable employee-column">Employee Name</th>
-                    <th class="filterable monday-column">
-                        Monday<br>{{ \Carbon\Carbon::now()->startOfWeek()->format('d/m/Y') }}
-                    </th>
-                    <th class="filterable tuesday-column">
-                        Tuesday<br>{{ \Carbon\Carbon::now()->startOfWeek()->addDay()->format('d/m/Y') }}
-                    </th>
-                    <th class="filterable wednesday-column">
-                        Wednesday<br>{{ \Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y') }}
-                    </th>
-                    <th class="filterable thursday-column">
-                        Thursday<br>{{ \Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y') }}
-                    </th>
-                    <th class="filterable friday-column">
-                        Friday<br>{{ \Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y') }}
+                    <th class="filterable {{ $selectedDay }}-column">
+                        {{ ucfirst($selectedDay) }}<br>
+                        {{ \Carbon\Carbon::now()->startOfWeek()->addDays(array_search($selectedDay, ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']))->format('d/m/Y') }}
                     </th>
                     <th class="filterable summary-column">Summary</th>
-                    <th>Actions</th> <!-- Always visible -->
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($reports as $report)
+                @forelse($reports as $report)
                     <tr>
                         <td class="filterable department-column">
                             {{ $report->employee->department->dept_name ?? 'N/A' }}
@@ -35,24 +38,14 @@
                             {{ $report->employee->full_name ?? 'N/A' }}
                         </td>
                         
-                        <td class="filterable monday-column">
-                            {{ $report->monday ?? 'N/A' }}
+                        <td class="filterable {{ $selectedDay }}-column">
+                            {{ $report->$selectedDay ?? 'N/A' }}
                         </td>
-                        <td class="filterable tuesday-column">
-                            {{ $report->tuesday ?? 'N/A' }}
-                        </td>
-                        <td class="filterable wednesday-column">
-                            {{ $report->wednesday ?? 'N/A' }}
-                        </td>
-                        <td class="filterable thursday-column">
-                            {{ $report->thursday ?? 'N/A' }}
-                        </td>
-                        <td class="filterable friday-column">
-                            {{ $report->friday ?? 'N/A' }}
-                        </td>
+                        
                         <td class="filterable summary-column">
                             {{ $report->summary ?? 'N/A' }}
                         </td>
+                        
                         <td style="width: 120px">
                             {!! Form::open(['route' => ['reports.destroy', $report->id], 'method' => 'delete']) !!}
                             <div class="btn-group">
@@ -67,14 +60,18 @@
                             {!! Form::close() !!}
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center">No reports found for {{ ucfirst($selectedDay) }}.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
 
     <div class="card-footer clearfix">
         <div class="float-right">
-            @include('adminlte-templates::common.paginate', ['records' => $reports])
+            {{ $reports->links() }}
         </div>
     </div>
 </div>
