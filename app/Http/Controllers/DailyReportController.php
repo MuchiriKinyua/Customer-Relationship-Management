@@ -6,14 +6,16 @@ use App\Models\Employee;
 use App\Models\DailyReport;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DailyReportController extends Controller
 {
-    public function create($employeeId)
+    public function create($employee_id)
     {
-        $employee = Employee::findOrFail($employeeId);
-        return view('daily_reports.create', compact('employee'));
+        // Pass the employee_id to the view or perform other operations
+        return view('daily_reports.create', compact('employee_id'));
     }
+    
 
     public function store(Request $request)
     {
@@ -99,20 +101,19 @@ public function submit(DailyReport $dailyReport)
     return redirect()->route('daily_reports.index')->with('success', 'Report successfully submitted.');
 }
 
-    public function index(Request $request)
-    {
-        $employees = Employee::all();
-        $reports = collect();
 
-        if ($request->has('employee_id')) {
-            $employee = Employee::find($request->employee_id);
-            if ($employee) {
-                $reports = DailyReport::where('employee_id', $employee->id)->get();
-            }
-        }
 
-        return view('daily_reports.index', compact('employees', 'reports'));
-    }
+public function index()
+{
+    // Get the logged-in user
+    $user = Auth::user();
+
+    // Fetch reports only for the logged-in user
+    $reports = DailyReport::where('employee_id', $user->id)->get();
+
+    return view('daily_reports.index', compact('reports'));
+}
+
 
     public function edit($id)
     {
