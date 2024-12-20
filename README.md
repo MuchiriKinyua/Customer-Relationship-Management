@@ -10,7 +10,7 @@ Employee Management: CRUD operations for employees </br>
 Daily Reporting: Employees submit daily reports detailing their tasks, which are saved in the system for future reference. </br>
 Lead and Client Management: Leads are linked to clients and products, with reporting functionality based on products and employee orders. </br>
 
-![Uploading CRM 2.png…]() </br>
+![CRM 2](https://github.com/user-attachments/assets/999fbb1a-da96-4d4b-a610-981e3e1e1c88) </br>
 
 ## Problem Statement </br>
 The primary goal of the system is to automate and streamline business operations such as reporting, and client-lead-product interactions. Specific challenges addressed include: </br>
