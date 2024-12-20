@@ -7,12 +7,12 @@ The system being developed is a CRM (Customer Relationship Management) applicati
 
 ## Key functionalities include: </br>
 
-Employee Management: CRUD operations for employees, including face verification for attendance. </br>
+Employee Management: CRUD operations for employees </br>
 Daily Reporting: Employees submit daily reports detailing their tasks, which are saved in the system for future reference. </br>
 Lead and Client Management: Leads are linked to clients and products, with reporting functionality based on products and employee orders. </br>
 
 ## Problem Statement </br>
-The primary goal of the system is to automate and streamline business operations such as attendance management, reporting, and client-lead-product interactions. Specific challenges addressed include: </br>
+The primary goal of the system is to automate and streamline business operations such as reporting, and client-lead-product interactions. Specific challenges addressed include: </br>
 
 Daily Reporting: The need for employees to submit daily reports and for managers to have easy access to these reports, ensuring timely updates on performance. </br>
 Lead-Product Tracking: Ensuring that orders are linked to leads and employees, and that product availability is filtered based on the lead’s selection. </br>
