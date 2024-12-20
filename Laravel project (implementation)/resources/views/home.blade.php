@@ -11,9 +11,29 @@
 <div class="container-fluid">
     <div class="item0">
         <h1>Welcome {{ Auth::user()->name }}</h1>
-        <p>{{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
+        <!-- Group date and clock in a flex container -->
+        <div style="display: flex; align-items: center; font-size: 1.2em;">
+            <p style="margin: 0;">{{ \Carbon\Carbon::now()->format('F j, Y') }}</p>
+            <p id="digital-clock" style="margin: 0 0 0 10px;"></p>
+        </div>
     </div>
 
+    <script>
+        function updateClock() {
+            const clockElement = document.getElementById('digital-clock');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+
+        // Initialize the clock immediately
+        updateClock();
+    </script>
 
     <div class="grid-row">
 

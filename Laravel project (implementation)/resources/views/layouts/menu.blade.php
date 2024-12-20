@@ -33,7 +33,7 @@
     </a>
 </li>
 
-@if(!auth()->user()->hasRole('super admin'))
+@if(!auth()->user()->hasRole('admin'))
 <li class="nav-item">
     <a href="{{ route('daily_reports.index') }}" class="nav-link">
         <i class="nav-icon fas fa-file-alt" style="color: green;"></i>
