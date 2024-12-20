@@ -1,6 +1,5 @@
 # CUSTOMER RELATIONSHIP MANAGEMENT </br>
-![Use-of-online-crm-tools-to-build-your-brand](https://github.com/user-attachments/assets/8341f3e5-164f-4f98-8b4d-52b1998b8366)
-
+![CRM](https://github.com/user-attachments/assets/35a8119f-908a-4dd7-b095-267e807baa5a)
 
 ## Overview </br>
 The system being developed is a CRM (Customer Relationship Management) application for managing various business operations, with a focus on employee management and daily report tracking. The system allows employees to submit daily reports and manage client-lead interactions and product orders. Various features have been integrated into the system to facilitate the efficient management of employee performance and business processes. </br>
