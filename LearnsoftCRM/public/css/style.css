@@ -1,0 +1,138 @@
+/* public/css/style.css */
+/* High specificity for overriding AdminLTE */
+.nav-sidebar > .nav-item > .nav-link.active {
+    background-color: orange !important;
+    color: white !important;
+}
+
+/* Optional: Change the hover color */
+.nav-sidebar > .nav-item > .nav-link:hover {
+    background-color: #ffa500 !important; /* Lighter orange */
+    color: white !important;
+}
+
+/* Ensure icon consistency */
+.nav-sidebar > .nav-item > .nav-link.active .nav-icon,
+.nav-sidebar > .nav-item > .nav-link:hover .nav-icon {
+    color: white !important;
+}
+
+body{
+    background-color: rgb(147, 147, 197);
+}
+
+.home-link {
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    font-size: 40px;
+    text-decoration: none; 
+    color: green; 
+}
+/* .login-link {
+    position: absolute; 
+    font-size: 40px;
+    margin-left: 900px;
+    text-decoration: none; 
+    color: green; 
+}
+.register-link {
+    position: absolute; 
+    font-size: 40px;
+    margin-left: 750px;
+    text-decoration: none; 
+    color: green; 
+} */
+
+.image-container {
+    margin-top: 300px;
+    margin-left: 700px;
+    height: 200px;
+    width: 100%;
+}
+
+.image-container img {
+    max-width: 100%; 
+    height: auto; 
+    max-height: 200px; 
+}
+
+.quote{
+    margin-left: 400px;
+    margin-top: 70px;
+    font-size: 30px;
+    color: brown;
+}
+
+body.hold-transition.login-page {
+    background-color: rgb(147, 147, 197);
+}
+
+.login-box {
+    margin-bottom: 200px;
+}
+
+.image-container-login {
+    width: 500px;
+    height: 300px; /* Set a fixed height */
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container-login img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+body.hold-transition.register-page {
+    background-color: rgb(147, 147, 197);
+}
+
+.image-container-register {
+    width: 500px;
+    height: 300px; /* Set a fixed height */
+    margin-left: -80px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container-register img {
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.register-logo{
+    color: brown;
+}
+
+.register-box {
+    background-color: blue;
+    margin-bottom: 200px;
+}
+
+.icon {
+    width: 150px;
+    height: 150px;
+    background: white;
+    color: #7a81ff;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+    text-align: center;
+}
+
+.icon p {
+    margin: 10px 0 0;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
