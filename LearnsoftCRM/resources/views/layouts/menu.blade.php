@@ -33,14 +33,12 @@
     </a>
 </li>
 
-@if(!auth()->user()->hasRole('super admin'))
 <li class="nav-item">
     <a href="{{ route('daily_reports.index') }}" class="nav-link">
         <i class="nav-icon fas fa-file-alt" style="color: green;"></i>
         <p>Employee Reports</p>
     </a>
 </li>
-@endif
 
 <li class="nav-item">
     <a href="{{ route('interactions.index') }}" class="nav-link {{ Request::is('interactions*') ? 'active' : '' }}">
